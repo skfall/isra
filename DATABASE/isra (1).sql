@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Час створення: Бер 23 2018 р., 14:11
+-- Час створення: Бер 24 2018 р., 18:41
 -- Версія сервера: 10.1.26-MariaDB
 -- Версія PHP: 7.1.8
 
@@ -259,7 +259,8 @@ INSERT INTO `osc_admin_menu` (`id`, `type`, `parent`, `table`, `additional_field
 (91, 0, 51, 'home_services', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Сервисы', 'home_services', 'fa-envelope-o', 8, '', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
 (92, 1, 3, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Email шаблоны', 'email_templates', '0', 9, 'Email templates', 0, '#', '2015-08-12 15:37:47', '2016-12-08 00:42:59', 1),
 (93, 1, 0, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Warehouse management', 'warehouse', 'help-icon-slider.png', 4, 'Управление складом', 0, '#', '2018-03-23 00:00:00', '2018-03-23 00:00:00', 1),
-(94, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Warehouses', 'warehouses', 'fa-cubes', 0, 'Company warehouses list', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0);
+(94, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Warehouses', 'warehouses', 'fa-cubes', 0, 'Company warehouses list', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
+(95, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Racks', 'racks', 'fa-cubes', 1, 'Warehouse racks', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0);
 
 -- --------------------------------------------------------
 
@@ -3489,7 +3490,8 @@ INSERT INTO `osc_logs` (`id`, `date`, `type`, `description`, `userid`, `ip`) VAL
 (833, '2018-03-22 09:43:32', 1, 'Admin login: Success login.', 9, '141.226.177.220'),
 (834, '2018-03-22 11:47:18', 1, 'Admin login: Success login.', 9, '141.226.177.220'),
 (835, '2018-03-23 00:38:01', 1, 'Admin login: Success login.', 8, '::1'),
-(836, '2018-03-23 14:23:04', 1, 'Admin login: Success login.', 8, '::1');
+(836, '2018-03-23 14:23:04', 1, 'Admin login: Success login.', 8, '::1'),
+(837, '2018-03-24 19:26:25', 1, 'Admin login: Success login.', 8, '::1');
 
 -- --------------------------------------------------------
 
@@ -8834,7 +8836,7 @@ CREATE TABLE `osc_users_types` (
 --
 
 INSERT INTO `osc_users_types` (`id`, `name`, `alias`, `block`, `admin_enter`, `change_login`, `dateCreate`, `dateModify`, `adminMod`) VALUES
-(1, 'SuperAdministrator', 'superadministrator', 0, 1, 1, '2013-11-14 00:00:00', '2018-03-23 14:52:00', 0),
+(1, 'SuperAdministrator', 'superadministrator', 0, 1, 1, '2013-11-14 00:00:00', '2018-03-24 19:35:36', 0),
 (2, 'ContentManager', 'contentmanager', 0, 1, 0, '2013-11-14 00:00:00', '2018-01-24 08:53:41', 0),
 (6, 'QualityManager', 'qualitymanager', 0, 1, 0, '2013-11-15 10:47:01', '2018-02-05 12:12:26', 0),
 (9, 'Client', 'client', 0, 0, 0, '2013-12-23 15:52:55', '2017-06-15 22:09:33', 0);
@@ -9479,7 +9481,34 @@ INSERT INTO `osc_user_type_access` (`id`, `access`, `type_id`, `menu_id`) VALUES
 (620, 0, 2, 83),
 (621, 0, 2, 84),
 (622, 0, 2, 85),
-(623, 1, 1, 94);
+(623, 1, 1, 94),
+(624, 1, 1, 95);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `osc_wh_racks`
+--
+
+CREATE TABLE `osc_wh_racks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `alias` varchar(255) DEFAULT NULL,
+  `block` int(11) NOT NULL DEFAULT '0',
+  `pos` int(11) NOT NULL DEFAULT '0',
+  `type` int(11) NOT NULL DEFAULT '1',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `warehouse_id` int(11) NOT NULL DEFAULT '0',
+  `description` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп даних таблиці `osc_wh_racks`
+--
+
+INSERT INTO `osc_wh_racks` (`id`, `name`, `alias`, `block`, `pos`, `type`, `created`, `modified`, `warehouse_id`, `description`) VALUES
+(1, 'test_ rackw', 'test-rackw', 0, 0, 1, '2018-03-24 19:43:21', '2018-03-24 19:48:48', 23, 'tests');
 
 -- --------------------------------------------------------
 
@@ -9503,7 +9532,8 @@ CREATE TABLE `osc_wh_warehouses` (
 --
 
 INSERT INTO `osc_wh_warehouses` (`id`, `name`, `alias`, `block`, `pos`, `created`, `modified`, `description`) VALUES
-(22, 'Test warehouse', 'test-warehouse', 0, 0, '2018-03-23 15:58:21', '2018-03-23 15:58:21', 'Some description');
+(22, 'Test warehouse', 'test-warehouse', 0, 0, '2018-03-23 15:58:21', '2018-03-23 15:58:21', 'Some description'),
+(23, 'wh2', 'wh2', 0, 0, '2018-03-24 19:46:38', '2018-03-24 19:46:38', '');
 
 --
 -- Індекси збережених таблиць
@@ -10107,6 +10137,12 @@ ALTER TABLE `osc_user_type_access`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Індекси таблиці `osc_wh_racks`
+--
+ALTER TABLE `osc_wh_racks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Індекси таблиці `osc_wh_warehouses`
 --
 ALTER TABLE `osc_wh_warehouses`
@@ -10130,7 +10166,7 @@ ALTER TABLE `designed_for_tests`
 -- AUTO_INCREMENT для таблиці `osc_admin_menu`
 --
 ALTER TABLE `osc_admin_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT для таблиці `osc_alt_users`
 --
@@ -10315,7 +10351,7 @@ ALTER TABLE `osc_languages`
 -- AUTO_INCREMENT для таблиці `osc_logs`
 --
 ALTER TABLE `osc_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=837;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=838;
 --
 -- AUTO_INCREMENT для таблиці `osc_log_types`
 --
@@ -10610,12 +10646,17 @@ ALTER TABLE `osc_users_types`
 -- AUTO_INCREMENT для таблиці `osc_user_type_access`
 --
 ALTER TABLE `osc_user_type_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=624;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=625;
+--
+-- AUTO_INCREMENT для таблиці `osc_wh_racks`
+--
+ALTER TABLE `osc_wh_racks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT для таблиці `osc_wh_warehouses`
 --
 ALTER TABLE `osc_wh_warehouses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
