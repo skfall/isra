@@ -4,6 +4,7 @@
 	$cardUpd = array(
 				'name'			=> $_POST['name'],
 				'alias'			=> $_POST['alias'],
+				'rows_limit'	=> (int)$_POST['rows_limit'],
 				'warehouse_id'	=> (int)$_POST['warehouse_id'],
 				'description'	=> $_POST['description'],
 				'block'			=> $_POST['block'][0],
@@ -15,20 +16,33 @@
 	$query = "SELECT id FROM `osc_wh_racks` WHERE `alias`='".$cardUpd['alias']."' AND `id`!=$item_id LIMIT 1";
 	$test_alias = $ah->rs($query);
 
+	$q = "SELECT COUNT(id) as count_rows FROM `osc_wh_rows` WHERE rack_id = '$item_id' LIMIT 1";
+	$current_rows = $ah->rs($q);
+	$current_rows = $current_rows[0]["count_rows"];
 	if(strlen($_POST['name'])>1){
 		if(!$test_alias){
 			if ($cardUpd['warehouse_id']) {
-				$query = "UPDATE `osc_wh_racks` SET ";
-				$cntUpd = 0;
-				foreach($cardUpd as $field => $itemUpd) {
-					$cntUpd++;
-					$query .= ($cntUpd==1 ? "`$field`='$itemUpd'" : ", `$field`='$itemUpd'");
-				}
-				$query .= " WHERE `id`=$item_id LIMIT 1";
-				$ah->rs($query);
+				if ($cardUpd['rows_limit'] && $cardUpd['rows_limit'] > 0) {
+					if ($current_rows <= $_POST['rows_limit']) {
+						$query = "UPDATE `osc_wh_racks` SET ";
+						$cntUpd = 0;
+						foreach($cardUpd as $field => $itemUpd) {
+							$cntUpd++;
+							$query .= ($cntUpd==1 ? "`$field`='$itemUpd'" : ", `$field`='$itemUpd'");
+						}
+						$query .= " WHERE `id`=$item_id LIMIT 1";
+						$ah->rs($query);
 
-				$data['message'] = "Rack was successfully updated.";
-				$data['status'] = "success";
+						$data['message'] = "Rack was successfully updated.";
+						$data['status'] = "success";
+					}else{
+						$data['status'] = "failed";
+						$data['message'] = "Rows quantity must be more than current rows quantity.";
+					}
+				}else{
+					$data['status'] = "failed";
+					$data['message'] = "Enter rows quantity.";
+				}
 			}else{
 				$data['status'] = "failed";
 				$data['message'] = "Select warehouse from list.";

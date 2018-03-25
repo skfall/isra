@@ -7,6 +7,7 @@
 					 'ID'						=>	array( 'type'=>'text', 		'field'=>'id', 				'params'=>array() ),
 					 'Name'					=>	array( 'type'=>'text', 		'field'=>'name',	 		'params'=>array() ),
 					 'Alias'					=>	array( 'type'=>'text', 		'field'=>'alias', 			'params'=>array() ),
+					 'Racks quantity'					=>	array( 'type'=>'text', 		'field'=>'racks_count', 			'params'=>array() ),
 					 'Description'					=>	array( 'type'=>'text', 		'field'=>'description', 			'params'=>array() ),					 
 					 'Position'			=>	array( 'type'=>'text', 		'field'=>'pos',		 		'params'=>array() ),
 					 'Publish'				=>	array( 'type'=>'text', 		'field'=>'block', 			'params'=>array( 'replace'=>array('0'=>'Yes', '1'=>'No') ) ),

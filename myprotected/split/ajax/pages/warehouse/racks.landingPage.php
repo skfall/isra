@@ -4,6 +4,10 @@
 	$itemsList = $zh->getRacks($params);
 	$totalItems = $zh->getRacks($params,true);
 
+	foreach ($itemsList as $key => &$rack) {
+		$rack['rows_available'] = $rack["rows_count"]."/".$rack["rows_limit"];
+	}
+
 	$on_page = (isset($_COOKIE['global_on_page']) ? $_COOKIE['global_on_page'] : GLOBAL_ON_PAGE);
 	$pages = ceil($totalItems/$on_page);
 	$start_page = (isset($params['start']) ? $params['start'] : 1);
@@ -42,8 +46,9 @@
 						  'Checkbox'			=>	array('type'=>'checkbox',	'field'=>''),
 						  'Name'			=>	array('type'=>'text',		'field'=>'name'),
 						  'Alias'				=>	array('type'=>'text',		'field'=>'alias'),
-						  'Warehouse'				=>	array('type'=>'text',		'field'=>'warehouse_name'),
+						  'Rows available'				=>	array('type'=>'text',		'field'=>'rows_available'),
 						  '№'					=>	array('type'=>'text',		'field'=>'pos'),
+						  'Warehouse'				=>	array('type'=>'text',		'field'=>'warehouse_name'),
 						  'Publish'			=>	array('type'=>'block',		'field'=>'block'),
 						  'View'			=>	array('type'=>'cardView',	'field'=>'Смотреть'),
 						  'Edit'		=>	array('type'=>'cardEdit',	'field'=>'Редактировать'),
