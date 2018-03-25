@@ -191,6 +191,80 @@ class Warehouse extends BasicHelp {
 		$query = "SELECT M.* FROM `osc_wh_racks` as M WHERE M.warehouse_id = '$wh_id'";
 		return $this->rs($query);
 	}
+
+	public function getSectionsItem($id) {
+		$query = "
+			SELECT M.*, 
+			(SELECT ROW.rack_id FROM `osc_wh_rows` AS ROW WHERE ROW.id = M.row_id LIMIT 1) AS rack_id,
+			(SELECT ROW.name FROM `osc_wh_rows` AS ROW WHERE ROW.id = M.row_id LIMIT 1) AS row_name,
+			(SELECT RACK.name FROM `osc_wh_racks` AS RACK WHERE RACK.id = rack_id LIMIT 1) AS rack_name, 
+			(SELECT RACK.warehouse_id FROM `osc_wh_racks` AS RACK WHERE RACK.id = rack_id LIMIT 1) AS warehouse_id, 
+			(SELECT W.name FROM `osc_wh_warehouses` AS W WHERE W.id = warehouse_id LIMIT 1) AS warehouse_name
+			FROM `osc_wh_sections` as M WHERE `id`='$id' LIMIT 1
+		";
+		$resultMassive = $this->rs($query);
+		$result = ($resultMassive ? $resultMassive[0] : array());
+		return $result;
+	}
+
+	
+	public function getSections($params=array(),$typeCount=false) {
+		$filter_and = "";
+		if(isset($params['filtr']['massive'])) {
+			foreach($params['filtr']['massive'] as $f_name => $f_value) {
+				if($f_value < 0) continue;
+				$filter_and .= " AND ($f_name='$f_value') ";
+			}
+		}
+		if(isset($params['filtr']['filtr_search_key']) && isset($params['filtr']['filtr_search_field']) && trim($params['filtr']['filtr_search_key']) != "") {
+			$search_field = $params['filtr']['filtr_search_field'];
+			$search_key = $params['filtr']['filtr_search_key'];
+			$filter_and .= " AND ($search_field LIKE '%$search_key%') ";
+		}
+		$sort_field		= (isset($params['filtr']['sort_filtr']) ? $params['filtr']['sort_filtr'] : "M.id");
+		$sort_vector	= (isset($params['filtr']['order_filtr']) ? $params['filtr']['order_filtr'] : "");			
+		$limit = (isset($_COOKIE['global_on_page']) ? (int)$_COOKIE['global_on_page'] : GLOBAL_ON_PAGE);
+		if($limit <= 0) $limit = GLOBAL_ON_PAGE;
+		$start = (isset($params['start']) ? ($params['start']-1)*$limit : 0);
+		if(!$typeCount)	{
+			$query = "
+					SELECT M.* ,
+					(SELECT ROW.rack_id FROM `osc_wh_rows` AS ROW WHERE ROW.id = M.row_id LIMIT 1) AS rack_id,
+					(SELECT ROW.name FROM `osc_wh_rows` AS ROW WHERE ROW.id = M.row_id LIMIT 1) AS row_name,
+					(SELECT RACK.name FROM `osc_wh_racks` AS RACK WHERE RACK.id = rack_id LIMIT 1) AS rack_name, 
+					(SELECT RACK.warehouse_id FROM `osc_wh_racks` AS RACK WHERE RACK.id = rack_id LIMIT 1) AS warehouse_id, 
+					(SELECT W.name FROM `osc_wh_warehouses` AS W WHERE W.id = warehouse_id LIMIT 1) AS warehouse_name
+					FROM `osc_wh_sections` as M  
+					WHERE 1 $filter_and 
+					ORDER BY $sort_field $sort_vector 
+					LIMIT $start,$limit
+			";
+
+			return $this->rs($query);
+		}else{
+			$query = "
+					SELECT COUNT(*) 
+					FROM `osc_wh_sections` as M 
+					WHERE 1 $filter_and 
+					LIMIT 100000
+			";
+			$result = $this->rs($query);
+			return $result[0]['COUNT(*)'];
+		}
+	}
+
+	public function getRowsList($rack_id = 1){
+		$query = "SELECT M.* FROM `osc_wh_rows` as M WHERE M.rack_id = '$rack_id'";
+		return $this->rs($query);
+	}
+
+	public function getAvailableShelvesForRow($row_size, $row_id){
+		$q = "SELECT SUM(size_x) AS total_size_sum FROM `osc_wh_sections` WHERE row_id = '$row_id'";
+		$other_sections_size = $this->rs($q);
+		$other_sections_size = (int)$other_sections_size[0]["total_size_sum"];
+		$available = (int)$row_size - $other_sections_size;
+		return $available;
+	}
 			
 	public function __destruct(){}
 }

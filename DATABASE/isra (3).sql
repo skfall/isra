@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Час створення: Бер 25 2018 р., 20:05
+-- Час створення: Бер 26 2018 р., 00:07
 -- Версія сервера: 10.1.26-MariaDB
 -- Версія PHP: 7.1.8
 
@@ -261,7 +261,8 @@ INSERT INTO `osc_admin_menu` (`id`, `type`, `parent`, `table`, `additional_field
 (93, 1, 0, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 'Warehouse management', 'warehouse', 'help-icon-slider.png', 4, 'Управление складом', 0, '#', '2018-03-23 00:00:00', '2018-03-23 00:00:00', 1),
 (94, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Warehouses', 'warehouses', 'fa-cubes', 0, 'Company warehouses list', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
 (95, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Racks', 'racks', 'fa-cubes', 1, 'Warehouse racks', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
-(96, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Rows', 'rows', 'fa-cubes', 2, 'Rack rows', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0);
+(96, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Rows', 'rows', 'fa-cubes', 2, 'Rack rows', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
+(97, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Sections', 'sections', 'fa-cubes', 3, 'Rows sections', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0);
 
 -- --------------------------------------------------------
 
@@ -8838,7 +8839,7 @@ CREATE TABLE `osc_users_types` (
 --
 
 INSERT INTO `osc_users_types` (`id`, `name`, `alias`, `block`, `admin_enter`, `change_login`, `dateCreate`, `dateModify`, `adminMod`) VALUES
-(1, 'SuperAdministrator', 'superadministrator', 0, 1, 1, '2013-11-14 00:00:00', '2018-03-25 19:02:00', 0),
+(1, 'SuperAdministrator', 'superadministrator', 0, 1, 1, '2013-11-14 00:00:00', '2018-03-25 21:31:58', 0),
 (2, 'ContentManager', 'contentmanager', 0, 1, 0, '2013-11-14 00:00:00', '2018-01-24 08:53:41', 0),
 (6, 'QualityManager', 'qualitymanager', 0, 1, 0, '2013-11-15 10:47:01', '2018-02-05 12:12:26', 0),
 (9, 'Client', 'client', 0, 0, 0, '2013-12-23 15:52:55', '2017-06-15 22:09:33', 0);
@@ -9485,7 +9486,8 @@ INSERT INTO `osc_user_type_access` (`id`, `access`, `type_id`, `menu_id`) VALUES
 (622, 0, 2, 85),
 (623, 1, 1, 94),
 (624, 1, 1, 95),
-(625, 1, 1, 96);
+(625, 1, 1, 96),
+(626, 1, 1, 97);
 
 -- --------------------------------------------------------
 
@@ -9512,8 +9514,8 @@ CREATE TABLE `osc_wh_racks` (
 --
 
 INSERT INTO `osc_wh_racks` (`id`, `name`, `alias`, `block`, `pos`, `type`, `created`, `modified`, `warehouse_id`, `rows_limit`, `description`) VALUES
-(10, 'A1', 'a1', 0, 0, 1, '2018-03-25 20:32:59', '2018-03-25 20:45:48', 23, 3, ''),
-(11, 'B1', 'b1', 0, 0, 1, '2018-03-25 20:47:51', '2018-03-25 20:47:51', 24, 3, '');
+(10, 'A', 'a', 0, 0, 1, '2018-03-25 20:32:59', '2018-03-26 00:12:14', 23, 3, ''),
+(11, 'B', 'b', 0, 0, 1, '2018-03-25 20:47:51', '2018-03-26 00:12:09', 23, 3, '');
 
 -- --------------------------------------------------------
 
@@ -9525,6 +9527,8 @@ CREATE TABLE `osc_wh_rows` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
+  `size_x` int(11) NOT NULL DEFAULT '0',
+  `size_y` int(11) NOT NULL DEFAULT '0',
   `block` int(11) NOT NULL DEFAULT '0',
   `rack_id` int(11) NOT NULL DEFAULT '0',
   `description` text,
@@ -9536,10 +9540,38 @@ CREATE TABLE `osc_wh_rows` (
 -- Дамп даних таблиці `osc_wh_rows`
 --
 
-INSERT INTO `osc_wh_rows` (`id`, `name`, `alias`, `block`, `rack_id`, `description`, `created`, `modified`) VALUES
-(6, '01', NULL, 0, 11, '', '2018-03-25 20:33:24', '2018-03-25 20:53:46'),
-(7, '02', NULL, 0, 11, '', '2018-03-25 20:33:43', '2018-03-25 20:53:56'),
-(8, '03', NULL, 0, 10, '', '2018-03-25 20:34:03', '2018-03-25 20:34:03');
+INSERT INTO `osc_wh_rows` (`id`, `name`, `alias`, `size_x`, `size_y`, `block`, `rack_id`, `description`, `created`, `modified`) VALUES
+(6, '1', NULL, 0, 0, 0, 11, '', '2018-03-25 20:33:24', '2018-03-26 00:12:59'),
+(7, '2', NULL, 0, 0, 0, 11, '', '2018-03-25 20:33:43', '2018-03-26 00:12:55'),
+(8, '1', NULL, 50, 0, 0, 10, '', '2018-03-25 20:34:03', '2018-03-26 00:33:37'),
+(9, '2', NULL, 20, 40, 0, 10, '', '2018-03-25 21:25:42', '2018-03-26 00:13:25');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `osc_wh_sections`
+--
+
+CREATE TABLE `osc_wh_sections` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `alias` varchar(255) DEFAULT NULL,
+  `block` int(11) NOT NULL DEFAULT '0',
+  `size_x` int(11) DEFAULT '0',
+  `size_y` int(11) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `description` text,
+  `row_id` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп даних таблиці `osc_wh_sections`
+--
+
+INSERT INTO `osc_wh_sections` (`id`, `name`, `alias`, `block`, `size_x`, `size_y`, `created`, `modified`, `description`, `row_id`) VALUES
+(2, '01', NULL, 0, 9, 0, '2018-03-26 00:09:28', '2018-03-26 00:09:28', '', 9),
+(3, '02', NULL, 0, 11, 0, '2018-03-26 00:45:31', '2018-03-26 01:06:34', '', 9);
 
 -- --------------------------------------------------------
 
@@ -10180,6 +10212,12 @@ ALTER TABLE `osc_wh_rows`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Індекси таблиці `osc_wh_sections`
+--
+ALTER TABLE `osc_wh_sections`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Індекси таблиці `osc_wh_warehouses`
 --
 ALTER TABLE `osc_wh_warehouses`
@@ -10203,7 +10241,7 @@ ALTER TABLE `designed_for_tests`
 -- AUTO_INCREMENT для таблиці `osc_admin_menu`
 --
 ALTER TABLE `osc_admin_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT для таблиці `osc_alt_users`
 --
@@ -10683,7 +10721,7 @@ ALTER TABLE `osc_users_types`
 -- AUTO_INCREMENT для таблиці `osc_user_type_access`
 --
 ALTER TABLE `osc_user_type_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=626;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=627;
 --
 -- AUTO_INCREMENT для таблиці `osc_wh_racks`
 --
@@ -10693,7 +10731,12 @@ ALTER TABLE `osc_wh_racks`
 -- AUTO_INCREMENT для таблиці `osc_wh_rows`
 --
 ALTER TABLE `osc_wh_rows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT для таблиці `osc_wh_sections`
+--
+ALTER TABLE `osc_wh_sections`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблиці `osc_wh_warehouses`
 --

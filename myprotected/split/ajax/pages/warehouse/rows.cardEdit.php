@@ -26,8 +26,11 @@
 						 'onChange'=>""
 						 ) ),
 					 'clear-1'				=>	array( 'type'=>'clear' ),
-					 'Publish'			=>	array( 'type'=>'block', 'field'=>'block', 'params'=>array( 'reverse'=>true )),
+					 'Shelves'				=>	array( 'type'=>'number', 'field'=>'size_x', 'params'=>array( 'size'=>40, 'hold'=>'Shelves',  ) ),
+					 'Levels'				=>	array( 'type'=>'number', 'field'=>'size_y', 'params'=>array( 'size'=>40, 'hold'=>'Levels',  ) ),
 					 'clear-2'				=>	array( 'type'=>'clear' ),
+					 'Publish'			=>	array( 'type'=>'block', 'field'=>'block', 'params'=>array( 'reverse'=>true )),
+					 'clear-3'				=>	array( 'type'=>'clear' ),
 					 'Description'				=>	array( 'type'=>'area', 'field'=>'description', 'params'=>array( 'size'=>100, 'hold'=>'Description' ) ),		
 					 );
 
@@ -36,7 +39,7 @@
 
 	$data['bodyContent'] .= "
 		<div class='ipad-20' id='order_conteinter'>
-			<h3 class='new-line'>Racks edit form</h3>";
+			<h3 class='new-line'>Rows edit form</h3>";
 	
 	$data['bodyContent'] .= $cardEditFormStr;
 				

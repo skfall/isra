@@ -17,7 +17,7 @@ $cardUpd = array(
 $query = "SELECT id FROM `osc_wh_warehouses` WHERE `alias`='".$cardUpd['alias']."' LIMIT 1";
 $test_alias = $ah->rs($query);
 
-if(mb_strlen($cardUpd['name'])>1) {
+if(mb_strlen($cardUpd['name'])>0) {
 	if(!$test_alias) {
 			$query = "INSERT INTO `osc_wh_warehouses` ";				
 			$fieldsStr = " ( ";

@@ -19,7 +19,7 @@
 	$q = "SELECT COUNT(id) as count_rows FROM `osc_wh_rows` WHERE rack_id = '$item_id' LIMIT 1";
 	$current_rows = $ah->rs($q);
 	$current_rows = $current_rows[0]["count_rows"];
-	if(strlen($_POST['name'])>1){
+	if(strlen($_POST['name'])>0){
 		if(!$test_alias){
 			if ($cardUpd['warehouse_id']) {
 				if ($cardUpd['rows_limit'] && $cardUpd['rows_limit'] > 0) {

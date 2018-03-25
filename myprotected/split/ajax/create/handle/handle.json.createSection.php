@@ -2,31 +2,36 @@
 $lang_fields = $ah->getAvailableLangs();
 $appTable = $_POST['appTable'];
 $item_id = (isset($_POST['item_id']) ? $_POST['item_id'] : 0);
+
 $cardUpd = array(
 				'name'			=> $_POST['name'],
 				//'alias'			=> $_POST['alias'],
-				'rack_id'	=> (int)$_POST['rack_id'],
+				'row_id'	=> (int)$_POST['row_id'],
 				'size_x'	=> (int)$_POST['size_x'],
-				'size_y'	=> (int)$_POST['size_y'],
 				'description'	=> $_POST['description'],
 				'block'			=> $_POST['block'][0],
 				'created'	=> date("Y-m-d H:i:s", time()),
 				'modified'	=> date("Y-m-d H:i:s", time())
 				);
 
-$rack_id = (int)$_POST['rack_id'];
+$row_id = (int)$_POST['row_id'];
 
 if(mb_strlen($cardUpd['name'])>0) {
-	if ($rack_id) {
-		$q = "SELECT M.* FROM `osc_wh_racks` AS M WHERE M.id = '$rack_id' LIMIT 1";
-		$row_limit = $ah->rs($q);
-		$row_limit = $row_limit[0]['rows_limit'];
-		$q = "SELECT COUNT(id) as count FROM `osc_wh_rows` WHERE `rack_id` = '$rack_id' LIMIT 1";
-		$current_rows_by_rack = $ah->rs($q);
-		$current_rows_by_rack = $current_rows_by_rack[0]['count'];
+	if ($row_id) {
+		$curr_size = (int)$_POST["size_x"];
+		$q = "SELECT M.size_x FROM `osc_wh_rows` AS M WHERE M.id = '$row_id' LIMIT 1";
+		$available_size = $ah->rs($q);
+		$available_size = (int)$available_size[0]["size_x"];
 
-		if ($current_rows_by_rack < $row_limit) {
-			$query = "INSERT INTO `osc_wh_rows` ";				
+		$q = "SELECT SUM(size_x) AS total_size_sum FROM `osc_wh_sections` WHERE row_id = '$row_id'";
+		$other_sections_size = $ah->rs($q);
+		$other_sections_size = (int)$other_sections_size[0]["total_size_sum"];
+
+		$available_size -= $other_sections_size;
+		$diff = $available_size - $curr_size;
+
+		if ($diff >= 0) {
+			$query = "INSERT INTO `osc_wh_sections` ";				
 			$fieldsStr = " ( ";
 			$valuesStr = " ( ";
 			$cntUpd = 0;
@@ -41,20 +46,20 @@ if(mb_strlen($cardUpd['name'])>0) {
 			$item_id = $ah->rs($query,0,1,1);	
 			if ($item_id) {
 				$data['item_id'] = $item_id;
-				$data['message'] = "Row was successfully created.";
+				$data['message'] = "Section was successfully created.";
 				$data['status'] = "success";
 			}else{
 				$data['item_id'] = 0;
 			}
 		}else{
 			$data['status'] = "failed";
-			$data['message'] = "Can`t create more than ".$row_limit." rows for this rack.";
+			$data['message'] = "There is no space for this section in selected row. Available space: ".$available_size." shelves.";
 		}
 	}else{
 		$data['status'] = "failed";
-		$data['message'] = "Select rack from list.";
+		$data['message'] = "Select row from list.";
 	}
 }else{
 	$data['status'] = "failed";
-	$data['message'] = "Enter row name.";
+	$data['message'] = "Enter section name.";
 }

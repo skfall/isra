@@ -5,6 +5,8 @@
 				'name'			=> $_POST['name'],
 				//'alias'			=> $_POST['alias'],
 				'rack_id'	=> (int)$_POST['rack_id'],
+				'size_x'	=> (int)$_POST['size_x'],
+				'size_y'	=> (int)$_POST['size_y'],
 				'description'	=> $_POST['description'],
 				'block'			=> $_POST['block'][0],
 				
@@ -15,7 +17,7 @@
 	$rack_id = (int)$_POST['rack_id'];
 
 	
-	if(strlen($_POST['name'])>1){
+	if(strlen($_POST['name'])>0){
 		if($rack_id){
 			$query = "UPDATE `osc_wh_rows` SET ";
 			$cntUpd = 0;

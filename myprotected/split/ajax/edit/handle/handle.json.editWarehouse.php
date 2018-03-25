@@ -14,7 +14,7 @@
 	$query = "SELECT id FROM `osc_wh_warehouses` WHERE `alias`='".$cardUpd['alias']."' AND `id`!=$item_id LIMIT 1";
 	$test_alias = $ah->rs($query);
 
-	if(strlen($_POST['name'])>1){
+	if(strlen($_POST['name'])>0){
 		if(!$test_alias){
 			$query = "UPDATE `osc_wh_warehouses` SET ";
 			$cntUpd = 0;

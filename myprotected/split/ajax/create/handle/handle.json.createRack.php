@@ -19,7 +19,7 @@ $cardUpd = array(
 $query = "SELECT id FROM `osc_wh_racks` WHERE `alias`='".$cardUpd['alias']."' LIMIT 1";
 $test_alias = $ah->rs($query);
 
-if(mb_strlen($cardUpd['name'])>1) {
+if(mb_strlen($cardUpd['name'])>0) {
 	if(!$test_alias) {
 		if ($cardUpd['warehouse_id']) {
 			if ($cardUpd['rows_limit'] && $cardUpd['rows_limit'] > 0) {

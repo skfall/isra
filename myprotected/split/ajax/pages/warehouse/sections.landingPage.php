@@ -1,13 +1,12 @@
 <?php 
 	$headParams = array( 'parent'=>$parent, 'alias'=>$alias, 'id'=>$id, 'appTable'=>$appTable );
 	$data['headContent'] = $zh->getLandingHeader($headParams);
-	$itemsList = $zh->getRows($params);
-	$totalItems = $zh->getRows($params,true);
+	$itemsList = $zh->getSections($params);
+	$totalItems = $zh->getSections($params,true);
 
 	if ($itemsList) {
 		foreach ($itemsList as $ri => &$row) {
-			$row["fullname"] = $row["rack_name"].$row["name"];
-			$row["size"] = $row["size_x"].'x'.$row["size_y"];
+			$row["fullname"] = $row["rack_name"].$row["row_name"].'-'.$row["name"];
 		}
 	}
 	$on_page = (isset($_COOKIE['global_on_page']) ? $_COOKIE['global_on_page'] : GLOBAL_ON_PAGE);
@@ -45,12 +44,13 @@
 	$filterFormStr = $zh->getLandingFilterForm($filterFormParams);
 	
 	$tableColumns = array(
-						  'Checkbox'			=>	array('type'=>'checkbox',	'field'=>''),
+						  'Checkbox'		=>	array('type'=>'checkbox',	'field'=>''),
 						  'Name'			=>	array('type'=>'text',		'field'=>'name'),
-						  'Full name'			=>	array('type'=>'text',		'field'=>'fullname'),
-						  'Shelves/Levels'			=>	array('type'=>'text',		'field'=>'size'),
-						  'Warehouse'				=>	array('type'=>'text',		'field'=>'warehouse_name'),
-						  'Rack'				=>	array('type'=>'text',		'field'=>'rack_name'),
+						  'Full name'		=>	array('type'=>'text',		'field'=>'fullname'),
+						  'Shelves'			=>	array('type'=>'text',		'field'=>'size_x'),
+						  'Warehouse'		=>	array('type'=>'text',		'field'=>'warehouse_name'),
+						  'Rack'			=>	array('type'=>'text',		'field'=>'rack_name'),
+						  'Row'				=>	array('type'=>'text',		'field'=>'row_name'),
 						  'Publish'			=>	array('type'=>'block',		'field'=>'block'),
 						  'View'			=>	array('type'=>'cardView',	'field'=>'Смотреть'),
 						  'Edit'		=>	array('type'=>'cardEdit',	'field'=>'Редактировать'),
