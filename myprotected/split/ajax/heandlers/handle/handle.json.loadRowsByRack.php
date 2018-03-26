@@ -3,7 +3,11 @@
 	
 	$rack_id = $_POST["rack"];
 	if ($rack_id) {
-		$q = "SELECT * FROM `osc_wh_rows` WHERE `rack_id` = '$rack_id'";
+		$q = "
+			SELECT M.*, 
+			(SELECT RACK.name FROM `osc_wh_racks` AS RACK WHERE RACK.id = M.rack_id LIMIT 1) AS rack_name 
+			FROM `osc_wh_rows` AS M WHERE M.rack_id = '$rack_id'
+		";
 		$rows = $ah->rs($q);
 		if ($rows) {
 			foreach ($rows as $key => &$row) {

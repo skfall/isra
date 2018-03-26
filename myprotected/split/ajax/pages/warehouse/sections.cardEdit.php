@@ -9,7 +9,7 @@
 	if ($rows) {
 		foreach ($rows as $k => &$r) {
 			$available_shelves = $zh->getAvailableShelvesForRow($r["size_x"], $r["id"]);
-			$r["fs_name"] = $r["name"]." (available shelves: ".$available_shelves.")";
+			$r["fs_name"] = $r["rack_name"].$r["name"]." (available shelves: ".$available_shelves.")";
 		}
 	}
 

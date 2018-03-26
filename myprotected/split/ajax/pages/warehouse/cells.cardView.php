@@ -5,7 +5,6 @@
 	$data['headContent'] = $zh->getCardViewHeader($headParams);
 	$cardItem = $zh->getSectionsItem($item_id);
 	$cardItem["fullname"] = $cardItem["rack_name"].$cardItem["row_name"].'-'.$cardItem["name"];
-	$cardItem["fullrowname"] = $cardItem["rack_name"].$cardItem["row_name"];
 	$rootPath = ROOT_PATH;
 	$cardTmp = array(
 					 'ID'						=>	array( 'type'=>'text', 		'field'=>'id', 				'params'=>array() ),
@@ -16,7 +15,7 @@
 					 //'Alias'					=>	array( 'type'=>'text', 		'field'=>'alias', 			'params'=>array() ),
 					 'Warehouse'					=>	array( 'type'=>'text', 		'field'=>'warehouse_name', 			'params'=>array() ),
 					 'Rack'					=>	array( 'type'=>'text', 		'field'=>'rack_name', 			'params'=>array() ),
-					 'Row'					=>	array( 'type'=>'text', 		'field'=>'fullrowname', 			'params'=>array() ),
+					 'Row'					=>	array( 'type'=>'text', 		'field'=>'row_name', 			'params'=>array() ),
 					 'Description'					=>	array( 'type'=>'text', 		'field'=>'description', 			'params'=>array() ),					 
 					 'Publish'				=>	array( 'type'=>'text', 		'field'=>'block', 			'params'=>array( 'replace'=>array('0'=>'Yes', '1'=>'No') ) ),
 					 'Created'			=>	array( 'type'=>'date', 		'field'=>'created', 		'params'=>array() ),

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Час створення: Бер 26 2018 р., 00:07
--- Версія сервера: 10.1.26-MariaDB
--- Версія PHP: 7.1.8
+-- Хост: 127.0.0.1:3306
+-- Час створення: Бер 26 2018 р., 16:58
+-- Версія сервера: 5.7.19
+-- Версія PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 -- Структура таблиці `backup_osc_page_services_items`
 --
 
-CREATE TABLE `backup_osc_page_services_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `backup_osc_page_services_items`;
+CREATE TABLE IF NOT EXISTS `backup_osc_page_services_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `ru_title` varchar(255) NOT NULL,
   `en_title` varchar(255) NOT NULL,
@@ -42,8 +43,9 @@ CREATE TABLE `backup_osc_page_services_items` (
   `block` int(11) NOT NULL DEFAULT '0',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `backup_osc_page_services_items`
@@ -69,10 +71,12 @@ INSERT INTO `backup_osc_page_services_items` (`id`, `title`, `ru_title`, `en_tit
 -- Структура таблиці `designed_for_tests`
 --
 
-CREATE TABLE `designed_for_tests` (
+DROP TABLE IF EXISTS `designed_for_tests`;
+CREATE TABLE IF NOT EXISTS `designed_for_tests` (
   `text` longtext NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `designed_for_tests`
@@ -160,8 +164,9 @@ INSERT INTO `designed_for_tests` (`text`, `id`) VALUES
 -- Структура таблиці `osc_admin_menu`
 --
 
-CREATE TABLE `osc_admin_menu` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_admin_menu`;
+CREATE TABLE IF NOT EXISTS `osc_admin_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(6) NOT NULL DEFAULT '0',
   `parent` int(6) NOT NULL DEFAULT '0',
   `table` varchar(255) DEFAULT '',
@@ -183,8 +188,9 @@ CREATE TABLE `osc_admin_menu` (
   `link` varchar(255) NOT NULL DEFAULT '#',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_admin_menu`
@@ -262,7 +268,8 @@ INSERT INTO `osc_admin_menu` (`id`, `type`, `parent`, `table`, `additional_field
 (94, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Warehouses', 'warehouses', 'fa-cubes', 0, 'Company warehouses list', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
 (95, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Racks', 'racks', 'fa-cubes', 1, 'Warehouse racks', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
 (96, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Rows', 'rows', 'fa-cubes', 2, 'Rack rows', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
-(97, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Sections', 'sections', 'fa-cubes', 3, 'Rows sections', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0);
+(97, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Sections', 'sections', 'fa-cubes', 3, 'Rows sections', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0),
+(98, 0, 93, '', '[]', '[]', '[]', '[]', NULL, NULL, '{\"start\":\"landing\",\"landing\":0,\"view\":0,\"edit\":0,\"create\":0}', '[]', 0, 'Cells', 'cells', 'fa-cubes', 4, 'Section cells', 0, '#', '2017-05-04 20:06:36', '2017-05-04 20:06:36', 0);
 
 -- --------------------------------------------------------
 
@@ -270,9 +277,10 @@ INSERT INTO `osc_admin_menu` (`id`, `type`, `parent`, `table`, `additional_field
 -- Структура таблиці `osc_alt_users`
 --
 
-CREATE TABLE `osc_alt_users` (
+DROP TABLE IF EXISTS `osc_alt_users`;
+CREATE TABLE IF NOT EXISTS `osc_alt_users` (
   `activity` int(1) NOT NULL DEFAULT '1',
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `num` int(11) DEFAULT NULL,
   `type` int(4) NOT NULL DEFAULT '9',
   `login` varchar(128) NOT NULL DEFAULT '0',
@@ -313,8 +321,10 @@ CREATE TABLE `osc_alt_users` (
   `active` int(1) NOT NULL DEFAULT '0',
   `order_id` int(5) NOT NULL DEFAULT '0',
   `comment` text,
-  `locale` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='System Administrators';
+  `locale` varchar(25) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `num` (`num`)
+) ENGINE=InnoDB AUTO_INCREMENT=275 DEFAULT CHARSET=utf8 COMMENT='System Administrators';
 
 --
 -- Дамп даних таблиці `osc_alt_users`
@@ -561,15 +571,17 @@ INSERT INTO `osc_alt_users` (`activity`, `id`, `num`, `type`, `login`, `email`, 
 -- Структура таблиці `osc_alt_users_notes`
 --
 
-CREATE TABLE `osc_alt_users_notes` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_alt_users_notes`;
+CREATE TABLE IF NOT EXISTS `osc_alt_users_notes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `alt_user_id` int(11) NOT NULL,
   `note` longtext NOT NULL,
   `modified` datetime NOT NULL,
   `created` datetime NOT NULL,
   `admin_id` int(11) NOT NULL,
-  `call_at` varchar(24) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `call_at` varchar(24) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=787 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_alt_users_notes`
@@ -1366,8 +1378,9 @@ INSERT INTO `osc_alt_users_notes` (`id`, `alt_user_id`, `note`, `modified`, `cre
 -- Структура таблиці `osc_articles`
 --
 
-CREATE TABLE `osc_articles` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_articles`;
+CREATE TABLE IF NOT EXISTS `osc_articles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cat_id` int(11) NOT NULL DEFAULT '4',
   `is_video` int(1) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL DEFAULT '0',
@@ -1405,8 +1418,9 @@ CREATE TABLE `osc_articles` (
   `dateModify` datetime NOT NULL,
   `adminMod` int(7) NOT NULL DEFAULT '0',
   `pos_id` int(7) NOT NULL DEFAULT '1',
-  `gal_orient` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Список статей и материалов для сайта';
+  `gal_orient` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='Список статей и материалов для сайта';
 
 --
 -- Дамп даних таблиці `osc_articles`
@@ -1432,8 +1446,9 @@ INSERT INTO `osc_articles` (`id`, `cat_id`, `is_video`, `name`, `ru_name`, `en_n
 -- Структура таблиці `osc_article_comments`
 --
 
-CREATE TABLE `osc_article_comments` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_article_comments`;
+CREATE TABLE IF NOT EXISTS `osc_article_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `art_id` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL DEFAULT '0',
   `comment` text NOT NULL,
@@ -1442,7 +1457,8 @@ CREATE TABLE `osc_article_comments` (
   `rating` int(5) NOT NULL DEFAULT '5',
   `block` int(1) NOT NULL DEFAULT '1',
   `dateCreate` datetime NOT NULL,
-  `dateModify` datetime NOT NULL
+  `dateModify` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1451,15 +1467,17 @@ CREATE TABLE `osc_article_comments` (
 -- Структура таблиці `osc_article_images_alts`
 --
 
-CREATE TABLE `osc_article_images_alts` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_article_images_alts`;
+CREATE TABLE IF NOT EXISTS `osc_article_images_alts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `block` int(11) NOT NULL DEFAULT '0',
   `art_id` int(11) NOT NULL,
   `data` text NOT NULL,
   `ru_data` text,
   `en_data` text,
-  `fr_data` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fr_data` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_article_images_alts`
@@ -1487,8 +1505,9 @@ INSERT INTO `osc_article_images_alts` (`id`, `block`, `art_id`, `data`, `ru_data
 -- Структура таблиці `osc_banners`
 --
 
-CREATE TABLE `osc_banners` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_banners`;
+CREATE TABLE IF NOT EXISTS `osc_banners` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '1',
   `alias` varchar(255) NOT NULL DEFAULT '0',
@@ -1507,8 +1526,9 @@ CREATE TABLE `osc_banners` (
   `index` int(1) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_banners`
@@ -1523,8 +1543,9 @@ INSERT INTO `osc_banners` (`id`, `name`, `type`, `alias`, `data`, `pos_id`, `blo
 -- Структура таблиці `osc_categories`
 --
 
-CREATE TABLE `osc_categories` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_categories`;
+CREATE TABLE IF NOT EXISTS `osc_categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent` int(5) NOT NULL DEFAULT '0',
   `name` varchar(127) NOT NULL DEFAULT '0',
   `ru_name` varchar(255) DEFAULT 'News',
@@ -1552,8 +1573,9 @@ CREATE TABLE `osc_categories` (
   `fr_meta_desc` text,
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Список категорий для группирования материалов';
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Список категорий для группирования материалов';
 
 --
 -- Дамп даних таблиці `osc_categories`
@@ -1568,15 +1590,17 @@ INSERT INTO `osc_categories` (`id`, `parent`, `name`, `ru_name`, `en_name`, `fr_
 -- Структура таблиці `osc_config`
 --
 
-CREATE TABLE `osc_config` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_config`;
+CREATE TABLE IF NOT EXISTS `osc_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) NOT NULL DEFAULT '0',
   `value` text NOT NULL,
   `details` text NOT NULL,
   `block` int(1) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Базовые настройки для сайта';
 
 -- --------------------------------------------------------
@@ -1585,16 +1609,18 @@ CREATE TABLE `osc_config` (
 -- Структура таблиці `osc_contact_form`
 --
 
-CREATE TABLE `osc_contact_form` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_contact_form`;
+CREATE TABLE IF NOT EXISTS `osc_contact_form` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `ip` varchar(63) DEFAULT NULL,
   `viewed` int(1) NOT NULL DEFAULT '0',
-  `dateCreate` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `dateCreate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=248 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_contact_form`
@@ -1652,11 +1678,13 @@ INSERT INTO `osc_contact_form` (`id`, `email`, `phone`, `name`, `message`, `ip`,
 -- Структура таблиці `osc_copy_history`
 --
 
-CREATE TABLE `osc_copy_history` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_copy_history`;
+CREATE TABLE IF NOT EXISTS `osc_copy_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `table` varchar(255) NOT NULL DEFAULT '0',
   `row_id` int(11) NOT NULL DEFAULT '0',
-  `copy_quant` int(11) NOT NULL DEFAULT '0'
+  `copy_quant` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1665,15 +1693,17 @@ CREATE TABLE `osc_copy_history` (
 -- Структура таблиці `osc_db_structure`
 --
 
-CREATE TABLE `osc_db_structure` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_db_structure`;
+CREATE TABLE IF NOT EXISTS `osc_db_structure` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `table` varchar(63) NOT NULL,
   `type` varchar(63) NOT NULL,
   `structure` text NOT NULL,
   `ref_table` varchar(63) NOT NULL,
   `ref_tables` varchar(127) NOT NULL,
   `date_create` datetime NOT NULL,
-  `date_modify` datetime NOT NULL
+  `date_modify` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Отображает структуры всей БД. Type: object, extention, reference';
 
 -- --------------------------------------------------------
@@ -1682,8 +1712,9 @@ CREATE TABLE `osc_db_structure` (
 -- Структура таблиці `osc_dialog_files_ref`
 --
 
-CREATE TABLE `osc_dialog_files_ref` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_dialog_files_ref`;
+CREATE TABLE IF NOT EXISTS `osc_dialog_files_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ref_table` varchar(63) NOT NULL DEFAULT '0',
   `ref_id` int(11) NOT NULL DEFAULT '0',
   `file` varchar(255) NOT NULL DEFAULT '0',
@@ -1693,7 +1724,8 @@ CREATE TABLE `osc_dialog_files_ref` (
   `href` varchar(255) DEFAULT NULL,
   `target` int(1) NOT NULL DEFAULT '1',
   `path` varchar(255) NOT NULL DEFAULT '/',
-  `adminMod` int(7) NOT NULL DEFAULT '0'
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1702,8 +1734,9 @@ CREATE TABLE `osc_dialog_files_ref` (
 -- Структура таблиці `osc_docs_ref`
 --
 
-CREATE TABLE `osc_docs_ref` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_docs_ref`;
+CREATE TABLE IF NOT EXISTS `osc_docs_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ref_table` varchar(63) NOT NULL DEFAULT '0',
   `ref_id` int(11) NOT NULL DEFAULT '0',
   `file` varchar(255) NOT NULL DEFAULT '0',
@@ -1713,7 +1746,8 @@ CREATE TABLE `osc_docs_ref` (
   `href` varchar(255) DEFAULT NULL,
   `target` int(1) NOT NULL DEFAULT '1',
   `path` varchar(255) NOT NULL DEFAULT '/',
-  `adminMod` int(7) NOT NULL DEFAULT '0'
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1722,15 +1756,17 @@ CREATE TABLE `osc_docs_ref` (
 -- Структура таблиці `osc_email_logs`
 --
 
-CREATE TABLE `osc_email_logs` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_email_logs`;
+CREATE TABLE IF NOT EXISTS `osc_email_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL DEFAULT '0',
   `email` varchar(64) NOT NULL,
   `from` varchar(64) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `date` datetime NOT NULL,
-  `ip` varchar(64) NOT NULL
+  `ip` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Project Email Logs';
 
 -- --------------------------------------------------------
@@ -1739,8 +1775,9 @@ CREATE TABLE `osc_email_logs` (
 -- Структура таблиці `osc_email_templates`
 --
 
-CREATE TABLE `osc_email_templates` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_email_templates`;
+CREATE TABLE IF NOT EXISTS `osc_email_templates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `body` text NOT NULL,
@@ -1750,8 +1787,9 @@ CREATE TABLE `osc_email_templates` (
   `fr_subject` varchar(255) DEFAULT NULL,
   `ru_body` text,
   `en_body` text,
-  `fr_body` text
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='email templaits';
+  `fr_body` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='email templaits';
 
 --
 -- Дамп даних таблиці `osc_email_templates`
@@ -1780,16 +1818,18 @@ INSERT INTO `osc_email_templates` (`id`, `name`, `subject`, `body`, `email_from`
 -- Структура таблиці `osc_faq`
 --
 
-CREATE TABLE `osc_faq` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_faq`;
+CREATE TABLE IF NOT EXISTS `osc_faq` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `question` text,
   `answer` text NOT NULL,
   `block` int(11) NOT NULL DEFAULT '0',
   `order_id` int(7) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_faq`
@@ -1804,8 +1844,9 @@ INSERT INTO `osc_faq` (`id`, `question`, `answer`, `block`, `order_id`, `dateCre
 -- Структура таблиці `osc_files_ref`
 --
 
-CREATE TABLE `osc_files_ref` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_files_ref`;
+CREATE TABLE IF NOT EXISTS `osc_files_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ref_table` varchar(63) NOT NULL DEFAULT '0',
   `ref_id` int(11) NOT NULL DEFAULT '0',
   `file` varchar(255) NOT NULL DEFAULT '0',
@@ -1816,8 +1857,9 @@ CREATE TABLE `osc_files_ref` (
   `target` int(1) NOT NULL DEFAULT '1',
   `path` varchar(255) NOT NULL DEFAULT '/',
   `order_pos` int(11) NOT NULL DEFAULT '0',
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_files_ref`
@@ -1867,12 +1909,14 @@ INSERT INTO `osc_files_ref` (`id`, `ref_table`, `ref_id`, `file`, `crop`, `title
 -- Структура таблиці `osc_forgot_password_hash`
 --
 
-CREATE TABLE `osc_forgot_password_hash` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_forgot_password_hash`;
+CREATE TABLE IF NOT EXISTS `osc_forgot_password_hash` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `dateCreate` datetime NOT NULL,
   `login` varchar(255) NOT NULL DEFAULT '0',
   `hash` varchar(32) NOT NULL DEFAULT '0',
-  `session_id` varchar(255) NOT NULL DEFAULT '0'
+  `session_id` varchar(255) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1881,16 +1925,18 @@ CREATE TABLE `osc_forgot_password_hash` (
 -- Структура таблиці `osc_galleries`
 --
 
-CREATE TABLE `osc_galleries` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_galleries`;
+CREATE TABLE IF NOT EXISTS `osc_galleries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '0',
   `caption` varchar(255) NOT NULL DEFAULT 'Gallery',
   `data` text NOT NULL,
   `block` int(1) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_galleries`
@@ -1909,8 +1955,9 @@ INSERT INTO `osc_galleries` (`id`, `name`, `caption`, `data`, `block`, `dateCrea
 -- Структура таблиці `osc_home_banner`
 --
 
-CREATE TABLE `osc_home_banner` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_banner`;
+CREATE TABLE IF NOT EXISTS `osc_home_banner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
@@ -1922,8 +1969,9 @@ CREATE TABLE `osc_home_banner` (
   `filename` varchar(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_banner`
@@ -1938,8 +1986,9 @@ INSERT INTO `osc_home_banner` (`id`, `title`, `caption`, `ru_title`, `ru_caption
 -- Структура таблиці `osc_home_contacts`
 --
 
-CREATE TABLE `osc_home_contacts` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_contacts`;
+CREATE TABLE IF NOT EXISTS `osc_home_contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
   `en_title` varchar(255) DEFAULT NULL,
@@ -1977,8 +2026,9 @@ CREATE TABLE `osc_home_contacts` (
   `map_icon3_l` double NOT NULL DEFAULT '35.21633',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_contacts`
@@ -1993,8 +2043,9 @@ INSERT INTO `osc_home_contacts` (`id`, `title`, `ru_title`, `en_title`, `fr_titl
 -- Структура таблиці `osc_home_info`
 --
 
-CREATE TABLE `osc_home_info` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_info`;
+CREATE TABLE IF NOT EXISTS `osc_home_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `prop_id` int(11) DEFAULT '0',
   `title` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
@@ -2003,8 +2054,9 @@ CREATE TABLE `osc_home_info` (
   `filename` varchar(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_info`
@@ -2019,8 +2071,9 @@ INSERT INTO `osc_home_info` (`id`, `prop_id`, `title`, `ru_title`, `en_title`, `
 -- Структура таблиці `osc_home_info_items`
 --
 
-CREATE TABLE `osc_home_info_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_info_items`;
+CREATE TABLE IF NOT EXISTS `osc_home_info_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
@@ -2034,8 +2087,9 @@ CREATE TABLE `osc_home_info_items` (
   `order_id` int(7) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_info_items`
@@ -2058,8 +2112,9 @@ INSERT INTO `osc_home_info_items` (`id`, `image`, `title`, `caption`, `ru_title`
 -- Структура таблиці `osc_home_prices`
 --
 
-CREATE TABLE `osc_home_prices` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_prices`;
+CREATE TABLE IF NOT EXISTS `osc_home_prices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
   `en_title` varchar(255) DEFAULT NULL,
@@ -2092,8 +2147,9 @@ CREATE TABLE `osc_home_prices` (
   `filename2` varchar(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_prices`
@@ -2108,8 +2164,9 @@ INSERT INTO `osc_home_prices` (`id`, `title`, `ru_title`, `en_title`, `fr_title`
 -- Структура таблиці `osc_home_reviews`
 --
 
-CREATE TABLE `osc_home_reviews` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_reviews`;
+CREATE TABLE IF NOT EXISTS `osc_home_reviews` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
@@ -2121,8 +2178,9 @@ CREATE TABLE `osc_home_reviews` (
   `filename` int(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Testimonials';
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Testimonials';
 
 --
 -- Дамп даних таблиці `osc_home_reviews`
@@ -2137,8 +2195,9 @@ INSERT INTO `osc_home_reviews` (`id`, `title`, `caption`, `ru_title`, `ru_captio
 -- Структура таблиці `osc_home_reviews_items`
 --
 
-CREATE TABLE `osc_home_reviews_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_reviews_items`;
+CREATE TABLE IF NOT EXISTS `osc_home_reviews_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   `comment` varchar(1024) DEFAULT '',
   `author` varchar(255) DEFAULT '',
@@ -2156,8 +2215,9 @@ CREATE TABLE `osc_home_reviews_items` (
   `order_id` int(7) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_reviews_items`
@@ -2177,11 +2237,13 @@ INSERT INTO `osc_home_reviews_items` (`id`, `image`, `comment`, `author`, `signa
 -- Структура таблиці `osc_home_sections_ref`
 --
 
-CREATE TABLE `osc_home_sections_ref` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_sections_ref`;
+CREATE TABLE IF NOT EXISTS `osc_home_sections_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `section_id` int(11) NOT NULL,
-  `table_name` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Связка секций для главной home_menu <-> tablename';
+  `table_name` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='Связка секций для главной home_menu <-> tablename';
 
 --
 -- Дамп даних таблиці `osc_home_sections_ref`
@@ -2203,8 +2265,9 @@ INSERT INTO `osc_home_sections_ref` (`id`, `section_id`, `table_name`) VALUES
 -- Структура таблиці `osc_home_services`
 --
 
-CREATE TABLE `osc_home_services` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_services`;
+CREATE TABLE IF NOT EXISTS `osc_home_services` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
@@ -2216,8 +2279,9 @@ CREATE TABLE `osc_home_services` (
   `filename` int(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Testimonials';
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Testimonials';
 
 --
 -- Дамп даних таблиці `osc_home_services`
@@ -2232,8 +2296,9 @@ INSERT INTO `osc_home_services` (`id`, `title`, `caption`, `ru_title`, `ru_capti
 -- Структура таблиці `osc_home_services_items`
 --
 
-CREATE TABLE `osc_home_services_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_services_items`;
+CREATE TABLE IF NOT EXISTS `osc_home_services_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   `comment` varchar(1024) DEFAULT '',
   `author` varchar(255) DEFAULT '',
@@ -2251,8 +2316,9 @@ CREATE TABLE `osc_home_services_items` (
   `order_id` int(7) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_services_items`
@@ -2269,8 +2335,9 @@ INSERT INTO `osc_home_services_items` (`id`, `image`, `comment`, `author`, `sign
 -- Структура таблиці `osc_home_steps`
 --
 
-CREATE TABLE `osc_home_steps` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_steps`;
+CREATE TABLE IF NOT EXISTS `osc_home_steps` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT '',
   `ru_title` varchar(255) DEFAULT NULL,
   `en_title` varchar(255) DEFAULT NULL,
@@ -2316,8 +2383,9 @@ CREATE TABLE `osc_home_steps` (
   `fr_content3` text,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_steps`
@@ -2332,8 +2400,9 @@ INSERT INTO `osc_home_steps` (`id`, `title`, `ru_title`, `en_title`, `fr_title`,
 -- Структура таблиці `osc_home_stock`
 --
 
-CREATE TABLE `osc_home_stock` (
-  `id` int(5) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_stock`;
+CREATE TABLE IF NOT EXISTS `osc_home_stock` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
   `en_title` varchar(255) DEFAULT NULL,
@@ -2346,8 +2415,9 @@ CREATE TABLE `osc_home_stock` (
   `filename` varchar(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Секция Наш Склад';
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Секция Наш Склад';
 
 --
 -- Дамп даних таблиці `osc_home_stock`
@@ -2362,8 +2432,9 @@ INSERT INTO `osc_home_stock` (`id`, `title`, `ru_title`, `en_title`, `fr_title`,
 -- Структура таблиці `osc_home_stock_items`
 --
 
-CREATE TABLE `osc_home_stock_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_stock_items`;
+CREATE TABLE IF NOT EXISTS `osc_home_stock_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
@@ -2377,8 +2448,9 @@ CREATE TABLE `osc_home_stock_items` (
   `order_id` int(7) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_stock_items`
@@ -2397,8 +2469,9 @@ INSERT INTO `osc_home_stock_items` (`id`, `image`, `title`, `caption`, `ru_title
 -- Структура таблиці `osc_home_why_us`
 --
 
-CREATE TABLE `osc_home_why_us` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_why_us`;
+CREATE TABLE IF NOT EXISTS `osc_home_why_us` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
   `en_title` varchar(255) DEFAULT NULL,
@@ -2406,8 +2479,9 @@ CREATE TABLE `osc_home_why_us` (
   `filename` varchar(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_why_us`
@@ -2422,8 +2496,9 @@ INSERT INTO `osc_home_why_us` (`id`, `title`, `ru_title`, `en_title`, `fr_title`
 -- Структура таблиці `osc_home_why_us_items`
 --
 
-CREATE TABLE `osc_home_why_us_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_home_why_us_items`;
+CREATE TABLE IF NOT EXISTS `osc_home_why_us_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `caption` varchar(255) DEFAULT NULL,
@@ -2437,8 +2512,9 @@ CREATE TABLE `osc_home_why_us_items` (
   `order_id` int(7) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_home_why_us_items`
@@ -2461,8 +2537,9 @@ INSERT INTO `osc_home_why_us_items` (`id`, `image`, `title`, `caption`, `ru_titl
 -- Структура таблиці `osc_income_questions`
 --
 
-CREATE TABLE `osc_income_questions` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_income_questions`;
+CREATE TABLE IF NOT EXISTS `osc_income_questions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `category` varchar(255) NOT NULL,
@@ -2470,8 +2547,9 @@ CREATE TABLE `osc_income_questions` (
   `message` text NOT NULL,
   `viewed` int(1) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
-  `dateModify` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `dateModify` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_income_questions`
@@ -2488,12 +2566,14 @@ INSERT INTO `osc_income_questions` (`id`, `email`, `phone`, `category`, `name`, 
 -- Структура таблиці `osc_languages`
 --
 
-CREATE TABLE `osc_languages` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `osc_languages`;
+CREATE TABLE IF NOT EXISTS `osc_languages` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `alias` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
-  `used` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `used` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Дамп даних таблиці `osc_languages`
@@ -2642,14 +2722,16 @@ INSERT INTO `osc_languages` (`id`, `name`, `alias`, `used`) VALUES
 -- Структура таблиці `osc_logs`
 --
 
-CREATE TABLE `osc_logs` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_logs`;
+CREATE TABLE IF NOT EXISTS `osc_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
   `type` int(7) NOT NULL DEFAULT '0',
   `description` varchar(1024) NOT NULL,
   `userid` int(11) NOT NULL DEFAULT '0',
-  `ip` varchar(64) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Project logs';
+  `ip` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=840 DEFAULT CHARSET=utf8 COMMENT='Project logs';
 
 --
 -- Дамп даних таблиці `osc_logs`
@@ -3494,7 +3576,8 @@ INSERT INTO `osc_logs` (`id`, `date`, `type`, `description`, `userid`, `ip`) VAL
 (835, '2018-03-23 00:38:01', 1, 'Admin login: Success login.', 8, '::1'),
 (836, '2018-03-23 14:23:04', 1, 'Admin login: Success login.', 8, '::1'),
 (837, '2018-03-24 19:26:25', 1, 'Admin login: Success login.', 8, '::1'),
-(838, '2018-03-25 18:50:40', 1, 'Admin login: Success login.', 8, '::1');
+(838, '2018-03-25 18:50:40', 1, 'Admin login: Success login.', 8, '::1'),
+(839, '2018-03-26 13:26:24', 1, 'Admin login: Success login.', 8, '::1');
 
 -- --------------------------------------------------------
 
@@ -3502,10 +3585,12 @@ INSERT INTO `osc_logs` (`id`, `date`, `type`, `description`, `userid`, `ip`) VAL
 -- Структура таблиці `osc_log_types`
 --
 
-CREATE TABLE `osc_log_types` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Project log types';
+DROP TABLE IF EXISTS `osc_log_types`;
+CREATE TABLE IF NOT EXISTS `osc_log_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Project log types';
 
 --
 -- Дамп даних таблиці `osc_log_types`
@@ -3521,8 +3606,9 @@ INSERT INTO `osc_log_types` (`id`, `name`) VALUES
 -- Структура таблиці `osc_menu`
 --
 
-CREATE TABLE `osc_menu` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_menu`;
+CREATE TABLE IF NOT EXISTS `osc_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(6) NOT NULL DEFAULT '0',
   `parent_id` int(6) NOT NULL DEFAULT '0',
   `name` varchar(127) NOT NULL DEFAULT '0',
@@ -3539,8 +3625,9 @@ CREATE TABLE `osc_menu` (
   `target` int(1) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_menu`
@@ -3565,15 +3652,17 @@ INSERT INTO `osc_menu` (`id`, `type`, `parent_id`, `name`, `ru_name`, `en_name`,
 -- Структура таблиці `osc_menu_home`
 --
 
-CREATE TABLE `osc_menu_home` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_menu_home`;
+CREATE TABLE IF NOT EXISTS `osc_menu_home` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `block` int(1) NOT NULL DEFAULT '0',
   `order_id` int(11) NOT NULL DEFAULT '0',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Список секций на главной';
+  `adminMod` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='Список секций на главной';
 
 --
 -- Дамп даних таблиці `osc_menu_home`
@@ -3595,11 +3684,13 @@ INSERT INTO `osc_menu_home` (`id`, `name`, `block`, `order_id`, `dateCreate`, `d
 -- Структура таблиці `osc_menu_pages_ref`
 --
 
-CREATE TABLE `osc_menu_pages_ref` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_menu_pages_ref`;
+CREATE TABLE IF NOT EXISTS `osc_menu_pages_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_id` int(11) NOT NULL,
-  `table_name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Связующая таблица меню и страниц';
+  `table_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='Связующая таблица меню и страниц';
 
 --
 -- Дамп даних таблиці `osc_menu_pages_ref`
@@ -3622,15 +3713,17 @@ INSERT INTO `osc_menu_pages_ref` (`id`, `menu_id`, `table_name`) VALUES
 -- Структура таблиці `osc_message_statuses`
 --
 
-CREATE TABLE `osc_message_statuses` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_message_statuses`;
+CREATE TABLE IF NOT EXISTS `osc_message_statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(63) NOT NULL DEFAULT '0',
   `alias` varchar(63) NOT NULL DEFAULT '0',
   `details` tinytext NOT NULL,
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Список типов сообщений';
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Список типов сообщений';
 
 --
 -- Дамп даних таблиці `osc_message_statuses`
@@ -3647,15 +3740,17 @@ INSERT INTO `osc_message_statuses` (`id`, `name`, `alias`, `details`, `dateCreat
 -- Структура таблиці `osc_message_types`
 --
 
-CREATE TABLE `osc_message_types` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_message_types`;
+CREATE TABLE IF NOT EXISTS `osc_message_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(63) NOT NULL DEFAULT '0',
   `alias` varchar(63) NOT NULL DEFAULT '0',
   `details` tinytext NOT NULL,
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Список типов сообщений';
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Список типов сообщений';
 
 --
 -- Дамп даних таблиці `osc_message_types`
@@ -3672,14 +3767,16 @@ INSERT INTO `osc_message_types` (`id`, `name`, `alias`, `details`, `dateCreate`,
 -- Структура таблиці `osc_o_boxes`
 --
 
-CREATE TABLE `osc_o_boxes` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_boxes`;
+CREATE TABLE IF NOT EXISTS `osc_o_boxes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `kind` int(11) NOT NULL DEFAULT '0',
   `order_id` int(11) NOT NULL DEFAULT '0',
   `article` varchar(123) DEFAULT '0',
   `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1204 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_boxes`
@@ -4896,8 +4993,9 @@ INSERT INTO `osc_o_boxes` (`id`, `kind`, `order_id`, `article`, `created`, `modi
 -- Структура таблиці `osc_o_boxes_kinds`
 --
 
-CREATE TABLE `osc_o_boxes_kinds` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_boxes_kinds`;
+CREATE TABLE IF NOT EXISTS `osc_o_boxes_kinds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -4917,8 +5015,9 @@ CREATE TABLE `osc_o_boxes_kinds` (
   `order` int(11) NOT NULL DEFAULT '1',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `type` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `type` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_boxes_kinds`
@@ -4935,16 +5034,18 @@ INSERT INTO `osc_o_boxes_kinds` (`id`, `image`, `name`, `title`, `description`, 
 -- Структура таблиці `osc_o_coupons`
 --
 
-CREATE TABLE `osc_o_coupons` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_coupons`;
+CREATE TABLE IF NOT EXISTS `osc_o_coupons` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(255) NOT NULL,
   `value` varchar(24) NOT NULL DEFAULT '0',
   `reusable` int(1) NOT NULL DEFAULT '0',
   `user_for` int(11) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `expires` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `expires` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_coupons`
@@ -4971,12 +5072,14 @@ INSERT INTO `osc_o_coupons` (`id`, `code`, `value`, `reusable`, `user_for`, `cre
 -- Структура таблиці `osc_o_coupons_using`
 --
 
-CREATE TABLE `osc_o_coupons_using` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_coupons_using`;
+CREATE TABLE IF NOT EXISTS `osc_o_coupons_using` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `coupon_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=187 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_coupons_using`
@@ -5176,8 +5279,9 @@ INSERT INTO `osc_o_coupons_using` (`id`, `coupon_id`, `user_id`, `date`) VALUES
 -- Структура таблиці `osc_o_extras_kinds`
 --
 
-CREATE TABLE `osc_o_extras_kinds` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_extras_kinds`;
+CREATE TABLE IF NOT EXISTS `osc_o_extras_kinds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `ru_title` varchar(255) DEFAULT NULL,
@@ -5193,8 +5297,9 @@ CREATE TABLE `osc_o_extras_kinds` (
   `order` int(11) NOT NULL DEFAULT '1',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `type` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `type` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_extras_kinds`
@@ -5216,8 +5321,9 @@ INSERT INTO `osc_o_extras_kinds` (`id`, `image`, `title`, `ru_title`, `en_title`
 -- Структура таблиці `osc_o_orders`
 --
 
-CREATE TABLE `osc_o_orders` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_orders`;
+CREATE TABLE IF NOT EXISTS `osc_o_orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ordernum` int(11) NOT NULL,
   `buch_num` varchar(123) DEFAULT '0',
   `kind_id` int(2) DEFAULT '1',
@@ -5240,8 +5346,9 @@ CREATE TABLE `osc_o_orders` (
   `pay_method_id` int(2) DEFAULT '1',
   `entrance` int(11) NOT NULL,
   `doc` varchar(255) DEFAULT NULL,
-  `new` int(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `new` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=219 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_orders`
@@ -5328,16 +5435,18 @@ INSERT INTO `osc_o_orders` (`id`, `ordernum`, `buch_num`, `kind_id`, `user_id`, 
 -- Структура таблиці `osc_o_orders_boxes`
 --
 
-CREATE TABLE `osc_o_orders_boxes` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_orders_boxes`;
+CREATE TABLE IF NOT EXISTS `osc_o_orders_boxes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `box_id` int(11) NOT NULL,
   `box_kind_id` int(11) NOT NULL DEFAULT '0',
   `price` float NOT NULL,
   `comment` text NOT NULL,
   `filename` varchar(512) DEFAULT NULL COMMENT 'File for additional clothes',
-  `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2233 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_orders_boxes`
@@ -6335,13 +6444,15 @@ INSERT INTO `osc_o_orders_boxes` (`id`, `order_id`, `box_id`, `box_kind_id`, `pr
 -- Структура таблиці `osc_o_orders_boxes_ref`
 --
 
-CREATE TABLE `osc_o_orders_boxes_ref` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_orders_boxes_ref`;
+CREATE TABLE IF NOT EXISTS `osc_o_orders_boxes_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `ref_id` int(11) NOT NULL,
   `filename` varchar(123) DEFAULT NULL,
   `comment` varchar(1024) DEFAULT NULL,
-  `owner` int(1) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf16 COMMENT='osc_o_orders_boxes gallery';
+  `owner` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=646 DEFAULT CHARSET=utf16 COMMENT='osc_o_orders_boxes gallery';
 
 --
 -- Дамп даних таблиці `osc_o_orders_boxes_ref`
@@ -6674,14 +6785,16 @@ INSERT INTO `osc_o_orders_boxes_ref` (`id`, `ref_id`, `filename`, `comment`, `ow
 -- Структура таблиці `osc_o_orders_extras`
 --
 
-CREATE TABLE `osc_o_orders_extras` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_orders_extras`;
+CREATE TABLE IF NOT EXISTS `osc_o_orders_extras` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `extra_kind_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `amount` float NOT NULL,
-  `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_orders_extras`
@@ -6734,8 +6847,9 @@ INSERT INTO `osc_o_orders_extras` (`id`, `order_id`, `extra_kind_id`, `quantity`
 -- Структура таблиці `osc_o_orders_invoices`
 --
 
-CREATE TABLE `osc_o_orders_invoices` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_orders_invoices`;
+CREATE TABLE IF NOT EXISTS `osc_o_orders_invoices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `invoice_num` varchar(25) NOT NULL,
   `comment` text NOT NULL,
@@ -6743,8 +6857,9 @@ CREATE TABLE `osc_o_orders_invoices` (
   `pay_date` datetime NOT NULL,
   `invoice_sum` double NOT NULL,
   `is_payed` int(1) DEFAULT '0',
-  `created` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=158 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_orders_invoices`
@@ -6885,8 +7000,9 @@ INSERT INTO `osc_o_orders_invoices` (`id`, `order_id`, `invoice_num`, `comment`,
 -- Структура таблиці `osc_o_orders_kinds`
 --
 
-CREATE TABLE `osc_o_orders_kinds` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_orders_kinds`;
+CREATE TABLE IF NOT EXISTS `osc_o_orders_kinds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `alias` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `en_title` varchar(255) NOT NULL,
@@ -6896,8 +7012,9 @@ CREATE TABLE `osc_o_orders_kinds` (
   `publish` int(11) NOT NULL DEFAULT '0',
   `order` int(11) NOT NULL DEFAULT '1',
   `created` datetime NOT NULL,
-  `modified` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_orders_kinds`
@@ -6915,13 +7032,15 @@ INSERT INTO `osc_o_orders_kinds` (`id`, `alias`, `title`, `en_title`, `ru_title`
 -- Структура таблиці `osc_o_order_pay_statuses`
 --
 
-CREATE TABLE `osc_o_order_pay_statuses` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_order_pay_statuses`;
+CREATE TABLE IF NOT EXISTS `osc_o_order_pay_statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `en_name` varchar(255) NOT NULL,
   `ru_name` varchar(255) NOT NULL,
-  `fr_name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Shop order statuses';
+  `fr_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Shop order statuses';
 
 --
 -- Дамп даних таблиці `osc_o_order_pay_statuses`
@@ -6938,13 +7057,15 @@ INSERT INTO `osc_o_order_pay_statuses` (`id`, `name`, `en_name`, `ru_name`, `fr_
 -- Структура таблиці `osc_o_order_statuses`
 --
 
-CREATE TABLE `osc_o_order_statuses` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_order_statuses`;
+CREATE TABLE IF NOT EXISTS `osc_o_order_statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `en_name` varchar(255) NOT NULL,
   `ru_name` varchar(255) NOT NULL,
-  `fr_name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Shop order statuses';
+  `fr_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Shop order statuses';
 
 --
 -- Дамп даних таблиці `osc_o_order_statuses`
@@ -6963,8 +7084,9 @@ INSERT INTO `osc_o_order_statuses` (`id`, `name`, `en_name`, `ru_name`, `fr_name
 -- Структура таблиці `osc_o_payments`
 --
 
-CREATE TABLE `osc_o_payments` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_payments`;
+CREATE TABLE IF NOT EXISTS `osc_o_payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `pay_method_id` int(7) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
@@ -6974,8 +7096,9 @@ CREATE TABLE `osc_o_payments` (
   `data` int(11) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Orders payments tranzactions';
+  `adminMod` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Orders payments tranzactions';
 
 --
 -- Дамп даних таблиці `osc_o_payments`
@@ -6990,13 +7113,15 @@ INSERT INTO `osc_o_payments` (`id`, `pay_method_id`, `user_id`, `order_id`, `sta
 -- Структура таблиці `osc_o_payment_methods`
 --
 
-CREATE TABLE `osc_o_payment_methods` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_payment_methods`;
+CREATE TABLE IF NOT EXISTS `osc_o_payment_methods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `en_name` varchar(255) NOT NULL,
   `ru_name` varchar(255) NOT NULL,
-  `fr_name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `fr_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_payment_methods`
@@ -7013,13 +7138,15 @@ INSERT INTO `osc_o_payment_methods` (`id`, `name`, `en_name`, `ru_name`, `fr_nam
 -- Структура таблиці `osc_o_payment_statuses`
 --
 
-CREATE TABLE `osc_o_payment_statuses` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_payment_statuses`;
+CREATE TABLE IF NOT EXISTS `osc_o_payment_statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `en_name` varchar(255) NOT NULL,
   `ru_name` varchar(255) NOT NULL,
-  `fr_name` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `fr_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_payment_statuses`
@@ -7037,8 +7164,9 @@ INSERT INTO `osc_o_payment_statuses` (`id`, `name`, `en_name`, `ru_name`, `fr_na
 -- Структура таблиці `osc_o_prices`
 --
 
-CREATE TABLE `osc_o_prices` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_prices`;
+CREATE TABLE IF NOT EXISTS `osc_o_prices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `delivery_sum` double NOT NULL COMMENT 'pre one delivery',
   `pallett_summ` double NOT NULL COMMENT 'per one day',
   `boxes_max_quantity` int(50) NOT NULL,
@@ -7052,8 +7180,9 @@ CREATE TABLE `osc_o_prices` (
   `rent_min_days` int(11) NOT NULL,
   `rent_min_quantity` int(11) NOT NULL,
   `rent_max_quantity` int(11) NOT NULL,
-  `rent_limit` int(3) DEFAULT '3'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='orders prices';
+  `rent_limit` int(3) DEFAULT '3',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='orders prices';
 
 --
 -- Дамп даних таблиці `osc_o_prices`
@@ -7068,15 +7197,17 @@ INSERT INTO `osc_o_prices` (`id`, `delivery_sum`, `pallett_summ`, `boxes_max_qua
 -- Структура таблиці `osc_o_transactions`
 --
 
-CREATE TABLE `osc_o_transactions` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_o_transactions`;
+CREATE TABLE IF NOT EXISTS `osc_o_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `sum` float NOT NULL,
   `response_code` varchar(9) NOT NULL,
   `response_data` longtext NOT NULL,
-  `created` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `created` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_o_transactions`
@@ -7154,8 +7285,9 @@ INSERT INTO `osc_o_transactions` (`id`, `order_id`, `user_id`, `sum`, `response_
 -- Структура таблиці `osc_page_about`
 --
 
-CREATE TABLE `osc_page_about` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_about`;
+CREATE TABLE IF NOT EXISTS `osc_page_about` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7207,8 +7339,9 @@ CREATE TABLE `osc_page_about` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_about`
@@ -7223,8 +7356,9 @@ INSERT INTO `osc_page_about` (`id`, `caption`, `ru_caption`, `en_caption`, `fr_c
 -- Структура таблиці `osc_page_about_items`
 --
 
-CREATE TABLE `osc_page_about_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_about_items`;
+CREATE TABLE IF NOT EXISTS `osc_page_about_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
   `image2` varchar(255) NOT NULL DEFAULT '0',
   `title` varchar(255) DEFAULT NULL,
@@ -7247,8 +7381,9 @@ CREATE TABLE `osc_page_about_items` (
   `order_id` int(7) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_about_items`
@@ -7272,8 +7407,9 @@ INSERT INTO `osc_page_about_items` (`id`, `image`, `image2`, `title`, `title2`, 
 -- Структура таблиці `osc_page_contacts`
 --
 
-CREATE TABLE `osc_page_contacts` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_contacts`;
+CREATE TABLE IF NOT EXISTS `osc_page_contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7298,8 +7434,9 @@ CREATE TABLE `osc_page_contacts` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_contacts`
@@ -7314,8 +7451,9 @@ INSERT INTO `osc_page_contacts` (`id`, `caption`, `ru_caption`, `en_caption`, `f
 -- Структура таблиці `osc_page_faq`
 --
 
-CREATE TABLE `osc_page_faq` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_faq`;
+CREATE TABLE IF NOT EXISTS `osc_page_faq` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7340,8 +7478,9 @@ CREATE TABLE `osc_page_faq` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_faq`
@@ -7356,8 +7495,9 @@ INSERT INTO `osc_page_faq` (`id`, `caption`, `ru_caption`, `en_caption`, `fr_cap
 -- Структура таблиці `osc_page_faq_items`
 --
 
-CREATE TABLE `osc_page_faq_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_faq_items`;
+CREATE TABLE IF NOT EXISTS `osc_page_faq_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `ru_title` varchar(255) NOT NULL,
   `en_title` varchar(255) NOT NULL,
@@ -7370,8 +7510,9 @@ CREATE TABLE `osc_page_faq_items` (
   `block` int(11) NOT NULL DEFAULT '0',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_faq_items`
@@ -7411,8 +7552,9 @@ INSERT INTO `osc_page_faq_items` (`id`, `title`, `ru_title`, `en_title`, `fr_tit
 -- Структура таблиці `osc_page_how_it_works`
 --
 
-CREATE TABLE `osc_page_how_it_works` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_how_it_works`;
+CREATE TABLE IF NOT EXISTS `osc_page_how_it_works` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `caption2` varchar(255) NOT NULL,
   `ru_caption2` varchar(255) NOT NULL,
@@ -7454,8 +7596,9 @@ CREATE TABLE `osc_page_how_it_works` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_how_it_works`
@@ -7470,8 +7613,9 @@ INSERT INTO `osc_page_how_it_works` (`id`, `caption`, `caption2`, `ru_caption2`,
 -- Структура таблиці `osc_page_how_it_works_items`
 --
 
-CREATE TABLE `osc_page_how_it_works_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_how_it_works_items`;
+CREATE TABLE IF NOT EXISTS `osc_page_how_it_works_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `ru_title` varchar(255) NOT NULL,
   `en_title` varchar(255) NOT NULL,
@@ -7485,8 +7629,9 @@ CREATE TABLE `osc_page_how_it_works_items` (
   `block` int(11) NOT NULL DEFAULT '0',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_how_it_works_items`
@@ -7503,8 +7648,9 @@ INSERT INTO `osc_page_how_it_works_items` (`id`, `title`, `ru_title`, `en_title`
 -- Структура таблиці `osc_page_policy`
 --
 
-CREATE TABLE `osc_page_policy` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_policy`;
+CREATE TABLE IF NOT EXISTS `osc_page_policy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7529,8 +7675,9 @@ CREATE TABLE `osc_page_policy` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_policy`
@@ -7545,8 +7692,9 @@ INSERT INTO `osc_page_policy` (`id`, `caption`, `ru_caption`, `en_caption`, `fr_
 -- Структура таблиці `osc_page_prices`
 --
 
-CREATE TABLE `osc_page_prices` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_prices`;
+CREATE TABLE IF NOT EXISTS `osc_page_prices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7571,8 +7719,9 @@ CREATE TABLE `osc_page_prices` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_prices`
@@ -7587,8 +7736,9 @@ INSERT INTO `osc_page_prices` (`id`, `caption`, `ru_caption`, `en_caption`, `fr_
 -- Структура таблиці `osc_page_prices_items`
 --
 
-CREATE TABLE `osc_page_prices_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_prices_items`;
+CREATE TABLE IF NOT EXISTS `osc_page_prices_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `ru_title` varchar(255) NOT NULL,
   `en_title` varchar(255) NOT NULL,
@@ -7597,8 +7747,9 @@ CREATE TABLE `osc_page_prices_items` (
   `ru_details` text NOT NULL,
   `en_details` text NOT NULL,
   `fr_details` text NOT NULL,
-  `block` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `block` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_prices_items`
@@ -7614,8 +7765,9 @@ INSERT INTO `osc_page_prices_items` (`id`, `title`, `ru_title`, `en_title`, `fr_
 -- Структура таблиці `osc_page_privacy`
 --
 
-CREATE TABLE `osc_page_privacy` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_privacy`;
+CREATE TABLE IF NOT EXISTS `osc_page_privacy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7640,8 +7792,9 @@ CREATE TABLE `osc_page_privacy` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_privacy`
@@ -7656,8 +7809,9 @@ INSERT INTO `osc_page_privacy` (`id`, `caption`, `ru_caption`, `en_caption`, `fr
 -- Структура таблиці `osc_page_services`
 --
 
-CREATE TABLE `osc_page_services` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_services`;
+CREATE TABLE IF NOT EXISTS `osc_page_services` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7682,8 +7836,9 @@ CREATE TABLE `osc_page_services` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_services`
@@ -7698,8 +7853,9 @@ INSERT INTO `osc_page_services` (`id`, `caption`, `ru_caption`, `en_caption`, `f
 -- Структура таблиці `osc_page_services_items`
 --
 
-CREATE TABLE `osc_page_services_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_services_items`;
+CREATE TABLE IF NOT EXISTS `osc_page_services_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `ru_title` varchar(255) NOT NULL,
   `en_title` varchar(255) NOT NULL,
@@ -7742,8 +7898,9 @@ CREATE TABLE `osc_page_services_items` (
   `meta_desc` text,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_services_items`
@@ -7767,8 +7924,9 @@ INSERT INTO `osc_page_services_items` (`id`, `title`, `ru_title`, `en_title`, `f
 -- Структура таблиці `osc_page_storage_rules`
 --
 
-CREATE TABLE `osc_page_storage_rules` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_storage_rules`;
+CREATE TABLE IF NOT EXISTS `osc_page_storage_rules` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7793,8 +7951,9 @@ CREATE TABLE `osc_page_storage_rules` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_storage_rules`
@@ -7809,8 +7968,9 @@ INSERT INTO `osc_page_storage_rules` (`id`, `caption`, `ru_caption`, `en_caption
 -- Структура таблиці `osc_page_storage_rules_items`
 --
 
-CREATE TABLE `osc_page_storage_rules_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_storage_rules_items`;
+CREATE TABLE IF NOT EXISTS `osc_page_storage_rules_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `ru_title` varchar(255) NOT NULL,
   `en_title` varchar(255) NOT NULL,
@@ -7823,8 +7983,9 @@ CREATE TABLE `osc_page_storage_rules_items` (
   `block` int(11) NOT NULL DEFAULT '0',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_storage_rules_items`
@@ -7845,8 +8006,9 @@ INSERT INTO `osc_page_storage_rules_items` (`id`, `title`, `ru_title`, `en_title
 -- Структура таблиці `osc_page_terms`
 --
 
-CREATE TABLE `osc_page_terms` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_page_terms`;
+CREATE TABLE IF NOT EXISTS `osc_page_terms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) DEFAULT NULL,
   `ru_caption` varchar(255) DEFAULT NULL,
   `en_caption` varchar(255) DEFAULT NULL,
@@ -7871,8 +8033,9 @@ CREATE TABLE `osc_page_terms` (
   `is_index` int(1) DEFAULT '1',
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `adminMod` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_page_terms`
@@ -7887,14 +8050,16 @@ INSERT INTO `osc_page_terms` (`id`, `caption`, `ru_caption`, `en_caption`, `fr_c
 -- Структура таблиці `osc_profile_translations`
 --
 
-CREATE TABLE `osc_profile_translations` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_profile_translations`;
+CREATE TABLE IF NOT EXISTS `osc_profile_translations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page` varchar(255) NOT NULL,
   `text` varchar(255) NOT NULL,
   `en_text` varchar(255) DEFAULT NULL,
   `ru_text` varchar(255) DEFAULT NULL,
-  `fr_text` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `fr_text` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_profile_translations`
@@ -8068,8 +8233,9 @@ INSERT INTO `osc_profile_translations` (`id`, `page`, `text`, `en_text`, `ru_tex
 -- Структура таблиці `osc_propositions`
 --
 
-CREATE TABLE `osc_propositions` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_propositions`;
+CREATE TABLE IF NOT EXISTS `osc_propositions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `en_name` varchar(255) DEFAULT NULL,
   `ru_name` varchar(255) DEFAULT NULL,
@@ -8086,8 +8252,9 @@ CREATE TABLE `osc_propositions` (
   `url` varchar(255) DEFAULT NULL,
   `dateCreate` datetime DEFAULT NULL,
   `dateModify` datetime DEFAULT NULL,
-  `adminMod` int(1) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='discount proposition';
+  `adminMod` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='discount proposition';
 
 --
 -- Дамп даних таблиці `osc_propositions`
@@ -8104,8 +8271,9 @@ INSERT INTO `osc_propositions` (`id`, `name`, `en_name`, `ru_name`, `fr_name`, `
 -- Структура таблиці `osc_recall`
 --
 
-CREATE TABLE `osc_recall` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_recall`;
+CREATE TABLE IF NOT EXISTS `osc_recall` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `category` varchar(255) NOT NULL,
@@ -8113,7 +8281,8 @@ CREATE TABLE `osc_recall` (
   `message` text NOT NULL,
   `viewed` int(1) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
-  `dateModify` datetime NOT NULL
+  `dateModify` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8122,14 +8291,16 @@ CREATE TABLE `osc_recall` (
 -- Структура таблиці `osc_service_parallaxes`
 --
 
-CREATE TABLE `osc_service_parallaxes` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_service_parallaxes`;
+CREATE TABLE IF NOT EXISTS `osc_service_parallaxes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `caption` varchar(512) DEFAULT NULL,
   `button_name` varchar(255) DEFAULT 'MAKE ORDER',
   `image` varchar(255) DEFAULT NULL,
-  `block` int(1) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Services parallaxes sections';
+  `block` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='Services parallaxes sections';
 
 --
 -- Дамп даних таблиці `osc_service_parallaxes`
@@ -8150,8 +8321,9 @@ INSERT INTO `osc_service_parallaxes` (`id`, `name`, `caption`, `button_name`, `i
 -- Структура таблиці `osc_service_tables`
 --
 
-CREATE TABLE `osc_service_tables` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_service_tables`;
+CREATE TABLE IF NOT EXISTS `osc_service_tables` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT '',
   `service_id` int(11) NOT NULL DEFAULT '0',
   `columns` int(11) NOT NULL DEFAULT '2',
@@ -8165,8 +8337,9 @@ CREATE TABLE `osc_service_tables` (
   `col7` int(1) DEFAULT '0',
   `col8` int(1) DEFAULT '0',
   `col9` int(1) DEFAULT '0',
-  `col10` int(1) DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Services tables rows and columns';
+  `col10` int(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Services tables rows and columns';
 
 --
 -- Дамп даних таблиці `osc_service_tables`
@@ -8184,8 +8357,9 @@ INSERT INTO `osc_service_tables` (`id`, `name`, `service_id`, `columns`, `block`
 -- Структура таблиці `osc_service_tables_rows`
 --
 
-CREATE TABLE `osc_service_tables_rows` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_service_tables_rows`;
+CREATE TABLE IF NOT EXISTS `osc_service_tables_rows` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `table_id` int(11) NOT NULL,
   `col1` varchar(512) NOT NULL,
   `col2` varchar(512) NOT NULL,
@@ -8196,8 +8370,10 @@ CREATE TABLE `osc_service_tables_rows` (
   `col7` varchar(512) NOT NULL,
   `col8` varchar(512) NOT NULL,
   `col9` varchar(512) NOT NULL,
-  `col10` varchar(512) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Services tables rows and columns';
+  `col10` varchar(512) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `table_id` (`table_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=326 DEFAULT CHARSET=utf8 COMMENT='Services tables rows and columns';
 
 --
 -- Дамп даних таблиці `osc_service_tables_rows`
@@ -8229,11 +8405,13 @@ INSERT INTO `osc_service_tables_rows` (`id`, `table_id`, `col1`, `col2`, `col3`,
 -- Структура таблиці `osc_site_languages`
 --
 
-CREATE TABLE `osc_site_languages` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_site_languages`;
+CREATE TABLE IF NOT EXISTS `osc_site_languages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `lang_id` int(11) NOT NULL,
-  `block` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `block` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_site_languages`
@@ -8251,12 +8429,14 @@ INSERT INTO `osc_site_languages` (`id`, `lang_id`, `block`) VALUES
 -- Структура таблиці `osc_site_positions`
 --
 
-CREATE TABLE `osc_site_positions` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_site_positions`;
+CREATE TABLE IF NOT EXISTS `osc_site_positions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '0',
   `alias` varchar(255) NOT NULL DEFAULT '0',
-  `block` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `block` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_site_positions`
@@ -8274,14 +8454,16 @@ INSERT INTO `osc_site_positions` (`id`, `name`, `alias`, `block`) VALUES
 -- Структура таблиці `osc_static_translations`
 --
 
-CREATE TABLE `osc_static_translations` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_static_translations`;
+CREATE TABLE IF NOT EXISTS `osc_static_translations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `page` varchar(255) NOT NULL DEFAULT 'all',
   `text` varchar(255) NOT NULL,
   `en_text` varchar(255) DEFAULT NULL,
   `ru_text` varchar(255) DEFAULT NULL,
-  `fr_text` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `fr_text` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_static_translations`
@@ -8329,12 +8511,14 @@ INSERT INTO `osc_static_translations` (`id`, `page`, `text`, `en_text`, `ru_text
 -- Структура таблиці `osc_tables_info`
 --
 
-CREATE TABLE `osc_tables_info` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_tables_info`;
+CREATE TABLE IF NOT EXISTS `osc_tables_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `table_name` varchar(255) NOT NULL DEFAULT '0',
   `details` text NOT NULL,
-  `fields` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fields` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_tables_info`
@@ -8501,8 +8685,9 @@ INSERT INTO `osc_tables_info` (`id`, `table_name`, `details`, `fields`) VALUES
 -- Структура таблиці `osc_tasks`
 --
 
-CREATE TABLE `osc_tasks` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_tasks`;
+CREATE TABLE IF NOT EXISTS `osc_tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(2) NOT NULL DEFAULT '1',
   `stock_order_id` int(11) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '0',
@@ -8511,8 +8696,9 @@ CREATE TABLE `osc_tasks` (
   `date_finish` datetime NOT NULL,
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(7) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `adminMod` int(7) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_tasks`
@@ -8541,12 +8727,14 @@ INSERT INTO `osc_tasks` (`id`, `type`, `stock_order_id`, `status`, `subject`, `c
 -- Структура таблиці `osc_task_admin_ref`
 --
 
-CREATE TABLE `osc_task_admin_ref` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_task_admin_ref`;
+CREATE TABLE IF NOT EXISTS `osc_task_admin_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `task_id` int(11) NOT NULL DEFAULT '0',
   `admin_id` int(11) NOT NULL DEFAULT '0',
-  `responsible_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `responsible_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_task_admin_ref`
@@ -8563,8 +8751,9 @@ INSERT INTO `osc_task_admin_ref` (`id`, `task_id`, `admin_id`, `responsible_id`)
 -- Структура таблиці `osc_total_config`
 --
 
-CREATE TABLE `osc_total_config` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_total_config`;
+CREATE TABLE IF NOT EXISTS `osc_total_config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `sitename` varchar(255) NOT NULL DEFAULT '0',
   `support_email` varchar(255) NOT NULL DEFAULT 'support@',
   `phone_number` varchar(255) NOT NULL DEFAULT '044-000-00-00',
@@ -8601,8 +8790,9 @@ CREATE TABLE `osc_total_config` (
   `copyright` varchar(255) NOT NULL,
   `en_copyright` varchar(512) DEFAULT NULL,
   `ru_copyright` varchar(512) DEFAULT NULL,
-  `fr_copyright` varchar(512) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fr_copyright` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_total_config`
@@ -8617,12 +8807,14 @@ INSERT INTO `osc_total_config` (`id`, `sitename`, `support_email`, `phone_number
 -- Структура таблиці `osc_translate`
 --
 
-CREATE TABLE `osc_translate` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_translate`;
+CREATE TABLE IF NOT EXISTS `osc_translate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `en` text NOT NULL,
-  `de` text NOT NULL
+  `de` text NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Translations ref table';
 
 -- --------------------------------------------------------
@@ -8631,8 +8823,9 @@ CREATE TABLE `osc_translate` (
 -- Структура таблиці `osc_users`
 --
 
-CREATE TABLE `osc_users` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_users`;
+CREATE TABLE IF NOT EXISTS `osc_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `num` int(11) DEFAULT NULL,
   `type` int(4) NOT NULL DEFAULT '9',
   `login` varchar(128) NOT NULL DEFAULT '0',
@@ -8682,8 +8875,10 @@ CREATE TABLE `osc_users` (
   `email_fb` varchar(255) DEFAULT '',
   `avatar_fb` varchar(255) DEFAULT '',
   `linked_id` varchar(255) DEFAULT '0',
-  `linked_data` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='System Administrators';
+  `linked_data` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `num` (`num`)
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8 COMMENT='System Administrators';
 
 --
 -- Дамп даних таблиці `osc_users`
@@ -8786,8 +8981,9 @@ INSERT INTO `osc_users` (`id`, `num`, `type`, `login`, `email`, `pass`, `phone`,
 -- Структура таблиці `osc_users_chat`
 --
 
-CREATE TABLE `osc_users_chat` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_users_chat`;
+CREATE TABLE IF NOT EXISTS `osc_users_chat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(63) NOT NULL DEFAULT 'message',
   `status` int(1) NOT NULL DEFAULT '0',
   `from_id` int(7) NOT NULL DEFAULT '0',
@@ -8797,7 +8993,8 @@ CREATE TABLE `osc_users_chat` (
   `file` varchar(63) NOT NULL DEFAULT '0',
   `important` int(2) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,
-  `dateModify` datetime NOT NULL
+  `dateModify` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Чат между пользователями';
 
 -- --------------------------------------------------------
@@ -8806,14 +9003,16 @@ CREATE TABLE `osc_users_chat` (
 -- Структура таблиці `osc_users_dialogs`
 --
 
-CREATE TABLE `osc_users_dialogs` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_users_dialogs`;
+CREATE TABLE IF NOT EXISTS `osc_users_dialogs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `last` int(1) NOT NULL DEFAULT '1',
   `message` text NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
   `from_id` int(11) NOT NULL DEFAULT '0',
   `to_id` int(11) NOT NULL DEFAULT '0',
-  `dateCreate` datetime NOT NULL
+  `dateCreate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8822,8 +9021,9 @@ CREATE TABLE `osc_users_dialogs` (
 -- Структура таблиці `osc_users_types`
 --
 
-CREATE TABLE `osc_users_types` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_users_types`;
+CREATE TABLE IF NOT EXISTS `osc_users_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL DEFAULT '0',
   `alias` varchar(255) NOT NULL DEFAULT '0',
   `block` int(1) NOT NULL DEFAULT '0',
@@ -8831,15 +9031,16 @@ CREATE TABLE `osc_users_types` (
   `change_login` int(1) NOT NULL DEFAULT '1',
   `dateCreate` datetime NOT NULL,
   `dateModify` datetime NOT NULL,
-  `adminMod` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Уровни пользователей';
+  `adminMod` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='Уровни пользователей';
 
 --
 -- Дамп даних таблиці `osc_users_types`
 --
 
 INSERT INTO `osc_users_types` (`id`, `name`, `alias`, `block`, `admin_enter`, `change_login`, `dateCreate`, `dateModify`, `adminMod`) VALUES
-(1, 'SuperAdministrator', 'superadministrator', 0, 1, 1, '2013-11-14 00:00:00', '2018-03-25 21:31:58', 0),
+(1, 'SuperAdministrator', 'superadministrator', 0, 1, 1, '2013-11-14 00:00:00', '2018-03-26 13:40:33', 0),
 (2, 'ContentManager', 'contentmanager', 0, 1, 0, '2013-11-14 00:00:00', '2018-01-24 08:53:41', 0),
 (6, 'QualityManager', 'qualitymanager', 0, 1, 0, '2013-11-15 10:47:01', '2018-02-05 12:12:26', 0),
 (9, 'Client', 'client', 0, 0, 0, '2013-12-23 15:52:55', '2017-06-15 22:09:33', 0);
@@ -8850,12 +9051,14 @@ INSERT INTO `osc_users_types` (`id`, `name`, `alias`, `block`, `admin_enter`, `c
 -- Структура таблиці `osc_user_type_access`
 --
 
-CREATE TABLE `osc_user_type_access` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_user_type_access`;
+CREATE TABLE IF NOT EXISTS `osc_user_type_access` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `access` int(1) NOT NULL DEFAULT '1',
   `type_id` int(11) NOT NULL DEFAULT '0',
-  `menu_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `menu_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=628 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_user_type_access`
@@ -9487,7 +9690,50 @@ INSERT INTO `osc_user_type_access` (`id`, `access`, `type_id`, `menu_id`) VALUES
 (623, 1, 1, 94),
 (624, 1, 1, 95),
 (625, 1, 1, 96),
-(626, 1, 1, 97);
+(626, 1, 1, 97),
+(627, 1, 1, 98);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `osc_wh_cells`
+--
+
+DROP TABLE IF EXISTS `osc_wh_cells`;
+CREATE TABLE IF NOT EXISTS `osc_wh_cells` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `x` int(11) NOT NULL DEFAULT '0',
+  `y` int(11) NOT NULL DEFAULT '0',
+  `type` int(11) NOT NULL DEFAULT '1',
+  `cell_size_x` int(11) NOT NULL DEFAULT '1',
+  `cell_size_y` int(11) NOT NULL DEFAULT '1',
+  `block` int(11) NOT NULL DEFAULT '0',
+  `description` text,
+  `section_id` int(11) NOT NULL DEFAULT '0',
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблиці `osc_wh_cell_box_ref`
+--
+
+DROP TABLE IF EXISTS `osc_wh_cell_box_ref`;
+CREATE TABLE IF NOT EXISTS `osc_wh_cell_box_ref` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cell_id` int(11) NOT NULL DEFAULT '0',
+  `box_id` int(11) NOT NULL DEFAULT '0',
+  `cell_type` int(11) NOT NULL DEFAULT '0',
+  `box_type` int(11) NOT NULL DEFAULT '0',
+  `storage_type` int(11) NOT NULL DEFAULT '0',
+  `description` text,
+  `created` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -9495,8 +9741,9 @@ INSERT INTO `osc_user_type_access` (`id`, `access`, `type_id`, `menu_id`) VALUES
 -- Структура таблиці `osc_wh_racks`
 --
 
-CREATE TABLE `osc_wh_racks` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_wh_racks`;
+CREATE TABLE IF NOT EXISTS `osc_wh_racks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `block` int(11) NOT NULL DEFAULT '0',
@@ -9506,8 +9753,9 @@ CREATE TABLE `osc_wh_racks` (
   `modified` datetime DEFAULT NULL,
   `warehouse_id` int(11) NOT NULL DEFAULT '0',
   `rows_limit` int(11) NOT NULL DEFAULT '3',
-  `description` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_wh_racks`
@@ -9523,8 +9771,9 @@ INSERT INTO `osc_wh_racks` (`id`, `name`, `alias`, `block`, `pos`, `type`, `crea
 -- Структура таблиці `osc_wh_rows`
 --
 
-CREATE TABLE `osc_wh_rows` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_wh_rows`;
+CREATE TABLE IF NOT EXISTS `osc_wh_rows` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `size_x` int(11) NOT NULL DEFAULT '0',
@@ -9533,8 +9782,9 @@ CREATE TABLE `osc_wh_rows` (
   `rack_id` int(11) NOT NULL DEFAULT '0',
   `description` text,
   `created` datetime DEFAULT NULL,
-  `modified` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_wh_rows`
@@ -9552,8 +9802,9 @@ INSERT INTO `osc_wh_rows` (`id`, `name`, `alias`, `size_x`, `size_y`, `block`, `
 -- Структура таблиці `osc_wh_sections`
 --
 
-CREATE TABLE `osc_wh_sections` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_wh_sections`;
+CREATE TABLE IF NOT EXISTS `osc_wh_sections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `block` int(11) NOT NULL DEFAULT '0',
@@ -9562,16 +9813,17 @@ CREATE TABLE `osc_wh_sections` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   `description` text,
-  `row_id` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `row_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_wh_sections`
 --
 
 INSERT INTO `osc_wh_sections` (`id`, `name`, `alias`, `block`, `size_x`, `size_y`, `created`, `modified`, `description`, `row_id`) VALUES
-(2, '01', NULL, 0, 9, 0, '2018-03-26 00:09:28', '2018-03-26 00:09:28', '', 9),
-(3, '02', NULL, 0, 11, 0, '2018-03-26 00:45:31', '2018-03-26 01:06:34', '', 9);
+(2, '01', NULL, 0, 9, 0, '2018-03-26 00:09:28', '2018-03-26 14:21:01', '', 8),
+(3, '02', NULL, 0, 11, 0, '2018-03-26 00:45:31', '2018-03-26 14:04:00', '', 8);
 
 -- --------------------------------------------------------
 
@@ -9579,16 +9831,18 @@ INSERT INTO `osc_wh_sections` (`id`, `name`, `alias`, `block`, `size_x`, `size_y
 -- Структура таблиці `osc_wh_warehouses`
 --
 
-CREATE TABLE `osc_wh_warehouses` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `osc_wh_warehouses`;
+CREATE TABLE IF NOT EXISTS `osc_wh_warehouses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   `block` int(11) NOT NULL DEFAULT '0',
   `pos` int(11) NOT NULL DEFAULT '0',
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
-  `description` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `osc_wh_warehouses`
@@ -9597,1151 +9851,7 @@ CREATE TABLE `osc_wh_warehouses` (
 INSERT INTO `osc_wh_warehouses` (`id`, `name`, `alias`, `block`, `pos`, `created`, `modified`, `description`) VALUES
 (23, 'Main warehouse', 'main-warehouse', 0, 0, '2018-03-24 19:46:38', '2018-03-25 19:02:27', ''),
 (24, 'Secondary warehouse', 'secondary-warehouse', 0, 0, '2018-03-25 19:16:41', '2018-03-25 19:16:41', '');
-
---
--- Індекси збережених таблиць
---
-
---
--- Індекси таблиці `backup_osc_page_services_items`
---
-ALTER TABLE `backup_osc_page_services_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `designed_for_tests`
---
-ALTER TABLE `designed_for_tests`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_admin_menu`
---
-ALTER TABLE `osc_admin_menu`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_alt_users`
---
-ALTER TABLE `osc_alt_users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `num` (`num`);
-
---
--- Індекси таблиці `osc_alt_users_notes`
---
-ALTER TABLE `osc_alt_users_notes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_articles`
---
-ALTER TABLE `osc_articles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_article_comments`
---
-ALTER TABLE `osc_article_comments`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_article_images_alts`
---
-ALTER TABLE `osc_article_images_alts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_banners`
---
-ALTER TABLE `osc_banners`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_categories`
---
-ALTER TABLE `osc_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_config`
---
-ALTER TABLE `osc_config`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_contact_form`
---
-ALTER TABLE `osc_contact_form`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_copy_history`
---
-ALTER TABLE `osc_copy_history`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_db_structure`
---
-ALTER TABLE `osc_db_structure`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_dialog_files_ref`
---
-ALTER TABLE `osc_dialog_files_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_docs_ref`
---
-ALTER TABLE `osc_docs_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_email_logs`
---
-ALTER TABLE `osc_email_logs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_email_templates`
---
-ALTER TABLE `osc_email_templates`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_faq`
---
-ALTER TABLE `osc_faq`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_files_ref`
---
-ALTER TABLE `osc_files_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_forgot_password_hash`
---
-ALTER TABLE `osc_forgot_password_hash`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_galleries`
---
-ALTER TABLE `osc_galleries`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_banner`
---
-ALTER TABLE `osc_home_banner`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_contacts`
---
-ALTER TABLE `osc_home_contacts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_info`
---
-ALTER TABLE `osc_home_info`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_info_items`
---
-ALTER TABLE `osc_home_info_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_prices`
---
-ALTER TABLE `osc_home_prices`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_reviews`
---
-ALTER TABLE `osc_home_reviews`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_reviews_items`
---
-ALTER TABLE `osc_home_reviews_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_sections_ref`
---
-ALTER TABLE `osc_home_sections_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_services`
---
-ALTER TABLE `osc_home_services`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_services_items`
---
-ALTER TABLE `osc_home_services_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_steps`
---
-ALTER TABLE `osc_home_steps`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_stock`
---
-ALTER TABLE `osc_home_stock`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_stock_items`
---
-ALTER TABLE `osc_home_stock_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_why_us`
---
-ALTER TABLE `osc_home_why_us`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_home_why_us_items`
---
-ALTER TABLE `osc_home_why_us_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_income_questions`
---
-ALTER TABLE `osc_income_questions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_languages`
---
-ALTER TABLE `osc_languages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_logs`
---
-ALTER TABLE `osc_logs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_log_types`
---
-ALTER TABLE `osc_log_types`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_menu`
---
-ALTER TABLE `osc_menu`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_menu_home`
---
-ALTER TABLE `osc_menu_home`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_menu_pages_ref`
---
-ALTER TABLE `osc_menu_pages_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_message_statuses`
---
-ALTER TABLE `osc_message_statuses`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_message_types`
---
-ALTER TABLE `osc_message_types`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_boxes`
---
-ALTER TABLE `osc_o_boxes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_boxes_kinds`
---
-ALTER TABLE `osc_o_boxes_kinds`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_coupons`
---
-ALTER TABLE `osc_o_coupons`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_coupons_using`
---
-ALTER TABLE `osc_o_coupons_using`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_extras_kinds`
---
-ALTER TABLE `osc_o_extras_kinds`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_orders`
---
-ALTER TABLE `osc_o_orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_orders_boxes`
---
-ALTER TABLE `osc_o_orders_boxes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_orders_boxes_ref`
---
-ALTER TABLE `osc_o_orders_boxes_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_orders_extras`
---
-ALTER TABLE `osc_o_orders_extras`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_orders_invoices`
---
-ALTER TABLE `osc_o_orders_invoices`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_orders_kinds`
---
-ALTER TABLE `osc_o_orders_kinds`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_order_pay_statuses`
---
-ALTER TABLE `osc_o_order_pay_statuses`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_order_statuses`
---
-ALTER TABLE `osc_o_order_statuses`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_payments`
---
-ALTER TABLE `osc_o_payments`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_payment_methods`
---
-ALTER TABLE `osc_o_payment_methods`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_payment_statuses`
---
-ALTER TABLE `osc_o_payment_statuses`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_prices`
---
-ALTER TABLE `osc_o_prices`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_o_transactions`
---
-ALTER TABLE `osc_o_transactions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_about`
---
-ALTER TABLE `osc_page_about`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_about_items`
---
-ALTER TABLE `osc_page_about_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_contacts`
---
-ALTER TABLE `osc_page_contacts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_faq`
---
-ALTER TABLE `osc_page_faq`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_faq_items`
---
-ALTER TABLE `osc_page_faq_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_how_it_works`
---
-ALTER TABLE `osc_page_how_it_works`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_how_it_works_items`
---
-ALTER TABLE `osc_page_how_it_works_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_policy`
---
-ALTER TABLE `osc_page_policy`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_prices`
---
-ALTER TABLE `osc_page_prices`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_prices_items`
---
-ALTER TABLE `osc_page_prices_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_privacy`
---
-ALTER TABLE `osc_page_privacy`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_services`
---
-ALTER TABLE `osc_page_services`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_services_items`
---
-ALTER TABLE `osc_page_services_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_storage_rules`
---
-ALTER TABLE `osc_page_storage_rules`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_storage_rules_items`
---
-ALTER TABLE `osc_page_storage_rules_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_page_terms`
---
-ALTER TABLE `osc_page_terms`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_profile_translations`
---
-ALTER TABLE `osc_profile_translations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_propositions`
---
-ALTER TABLE `osc_propositions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_recall`
---
-ALTER TABLE `osc_recall`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_service_parallaxes`
---
-ALTER TABLE `osc_service_parallaxes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_service_tables`
---
-ALTER TABLE `osc_service_tables`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_service_tables_rows`
---
-ALTER TABLE `osc_service_tables_rows`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `table_id` (`table_id`);
-
---
--- Індекси таблиці `osc_site_languages`
---
-ALTER TABLE `osc_site_languages`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_site_positions`
---
-ALTER TABLE `osc_site_positions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_static_translations`
---
-ALTER TABLE `osc_static_translations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_tables_info`
---
-ALTER TABLE `osc_tables_info`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_tasks`
---
-ALTER TABLE `osc_tasks`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_task_admin_ref`
---
-ALTER TABLE `osc_task_admin_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_total_config`
---
-ALTER TABLE `osc_total_config`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_translate`
---
-ALTER TABLE `osc_translate`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_users`
---
-ALTER TABLE `osc_users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `num` (`num`);
-
---
--- Індекси таблиці `osc_users_chat`
---
-ALTER TABLE `osc_users_chat`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_users_dialogs`
---
-ALTER TABLE `osc_users_dialogs`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_users_types`
---
-ALTER TABLE `osc_users_types`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_user_type_access`
---
-ALTER TABLE `osc_user_type_access`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_wh_racks`
---
-ALTER TABLE `osc_wh_racks`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_wh_rows`
---
-ALTER TABLE `osc_wh_rows`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_wh_sections`
---
-ALTER TABLE `osc_wh_sections`
-  ADD PRIMARY KEY (`id`);
-
---
--- Індекси таблиці `osc_wh_warehouses`
---
-ALTER TABLE `osc_wh_warehouses`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT для збережених таблиць
---
-
---
--- AUTO_INCREMENT для таблиці `backup_osc_page_services_items`
---
-ALTER TABLE `backup_osc_page_services_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT для таблиці `designed_for_tests`
---
-ALTER TABLE `designed_for_tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
---
--- AUTO_INCREMENT для таблиці `osc_admin_menu`
---
-ALTER TABLE `osc_admin_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
---
--- AUTO_INCREMENT для таблиці `osc_alt_users`
---
-ALTER TABLE `osc_alt_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
---
--- AUTO_INCREMENT для таблиці `osc_alt_users_notes`
---
-ALTER TABLE `osc_alt_users_notes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=787;
---
--- AUTO_INCREMENT для таблиці `osc_articles`
---
-ALTER TABLE `osc_articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT для таблиці `osc_article_comments`
---
-ALTER TABLE `osc_article_comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_article_images_alts`
---
-ALTER TABLE `osc_article_images_alts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT для таблиці `osc_banners`
---
-ALTER TABLE `osc_banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_categories`
---
-ALTER TABLE `osc_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_config`
---
-ALTER TABLE `osc_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_contact_form`
---
-ALTER TABLE `osc_contact_form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
---
--- AUTO_INCREMENT для таблиці `osc_copy_history`
---
-ALTER TABLE `osc_copy_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_db_structure`
---
-ALTER TABLE `osc_db_structure`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_dialog_files_ref`
---
-ALTER TABLE `osc_dialog_files_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_docs_ref`
---
-ALTER TABLE `osc_docs_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_email_logs`
---
-ALTER TABLE `osc_email_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_email_templates`
---
-ALTER TABLE `osc_email_templates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
---
--- AUTO_INCREMENT для таблиці `osc_faq`
---
-ALTER TABLE `osc_faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_files_ref`
---
-ALTER TABLE `osc_files_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
---
--- AUTO_INCREMENT для таблиці `osc_forgot_password_hash`
---
-ALTER TABLE `osc_forgot_password_hash`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_galleries`
---
-ALTER TABLE `osc_galleries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT для таблиці `osc_home_banner`
---
-ALTER TABLE `osc_home_banner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_contacts`
---
-ALTER TABLE `osc_home_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_info`
---
-ALTER TABLE `osc_home_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_info_items`
---
-ALTER TABLE `osc_home_info_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT для таблиці `osc_home_prices`
---
-ALTER TABLE `osc_home_prices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_reviews`
---
-ALTER TABLE `osc_home_reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_reviews_items`
---
-ALTER TABLE `osc_home_reviews_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT для таблиці `osc_home_sections_ref`
---
-ALTER TABLE `osc_home_sections_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT для таблиці `osc_home_services`
---
-ALTER TABLE `osc_home_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_services_items`
---
-ALTER TABLE `osc_home_services_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT для таблиці `osc_home_steps`
---
-ALTER TABLE `osc_home_steps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_stock`
---
-ALTER TABLE `osc_home_stock`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_stock_items`
---
-ALTER TABLE `osc_home_stock_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT для таблиці `osc_home_why_us`
---
-ALTER TABLE `osc_home_why_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_home_why_us_items`
---
-ALTER TABLE `osc_home_why_us_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT для таблиці `osc_income_questions`
---
-ALTER TABLE `osc_income_questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
---
--- AUTO_INCREMENT для таблиці `osc_languages`
---
-ALTER TABLE `osc_languages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
---
--- AUTO_INCREMENT для таблиці `osc_logs`
---
-ALTER TABLE `osc_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=839;
---
--- AUTO_INCREMENT для таблиці `osc_log_types`
---
-ALTER TABLE `osc_log_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT для таблиці `osc_menu`
---
-ALTER TABLE `osc_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT для таблиці `osc_menu_home`
---
-ALTER TABLE `osc_menu_home`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT для таблиці `osc_menu_pages_ref`
---
-ALTER TABLE `osc_menu_pages_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT для таблиці `osc_message_statuses`
---
-ALTER TABLE `osc_message_statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT для таблиці `osc_message_types`
---
-ALTER TABLE `osc_message_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT для таблиці `osc_o_boxes`
---
-ALTER TABLE `osc_o_boxes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1204;
---
--- AUTO_INCREMENT для таблиці `osc_o_boxes_kinds`
---
-ALTER TABLE `osc_o_boxes_kinds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT для таблиці `osc_o_coupons`
---
-ALTER TABLE `osc_o_coupons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
---
--- AUTO_INCREMENT для таблиці `osc_o_coupons_using`
---
-ALTER TABLE `osc_o_coupons_using`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
---
--- AUTO_INCREMENT для таблиці `osc_o_extras_kinds`
---
-ALTER TABLE `osc_o_extras_kinds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT для таблиці `osc_o_orders`
---
-ALTER TABLE `osc_o_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
---
--- AUTO_INCREMENT для таблиці `osc_o_orders_boxes`
---
-ALTER TABLE `osc_o_orders_boxes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2233;
---
--- AUTO_INCREMENT для таблиці `osc_o_orders_boxes_ref`
---
-ALTER TABLE `osc_o_orders_boxes_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=646;
---
--- AUTO_INCREMENT для таблиці `osc_o_orders_extras`
---
-ALTER TABLE `osc_o_orders_extras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
---
--- AUTO_INCREMENT для таблиці `osc_o_orders_invoices`
---
-ALTER TABLE `osc_o_orders_invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
---
--- AUTO_INCREMENT для таблиці `osc_o_orders_kinds`
---
-ALTER TABLE `osc_o_orders_kinds`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT для таблиці `osc_o_order_pay_statuses`
---
-ALTER TABLE `osc_o_order_pay_statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT для таблиці `osc_o_order_statuses`
---
-ALTER TABLE `osc_o_order_statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT для таблиці `osc_o_payments`
---
-ALTER TABLE `osc_o_payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT для таблиці `osc_o_payment_methods`
---
-ALTER TABLE `osc_o_payment_methods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT для таблиці `osc_o_payment_statuses`
---
-ALTER TABLE `osc_o_payment_statuses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT для таблиці `osc_o_prices`
---
-ALTER TABLE `osc_o_prices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_o_transactions`
---
-ALTER TABLE `osc_o_transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
---
--- AUTO_INCREMENT для таблиці `osc_page_about`
---
-ALTER TABLE `osc_page_about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT для таблиці `osc_page_about_items`
---
-ALTER TABLE `osc_page_about_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT для таблиці `osc_page_contacts`
---
-ALTER TABLE `osc_page_contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_faq`
---
-ALTER TABLE `osc_page_faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_faq_items`
---
-ALTER TABLE `osc_page_faq_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
---
--- AUTO_INCREMENT для таблиці `osc_page_how_it_works`
---
-ALTER TABLE `osc_page_how_it_works`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_how_it_works_items`
---
-ALTER TABLE `osc_page_how_it_works_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT для таблиці `osc_page_policy`
---
-ALTER TABLE `osc_page_policy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_prices`
---
-ALTER TABLE `osc_page_prices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_prices_items`
---
-ALTER TABLE `osc_page_prices_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT для таблиці `osc_page_privacy`
---
-ALTER TABLE `osc_page_privacy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_services`
---
-ALTER TABLE `osc_page_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_services_items`
---
-ALTER TABLE `osc_page_services_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT для таблиці `osc_page_storage_rules`
---
-ALTER TABLE `osc_page_storage_rules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_page_storage_rules_items`
---
-ALTER TABLE `osc_page_storage_rules_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT для таблиці `osc_page_terms`
---
-ALTER TABLE `osc_page_terms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_profile_translations`
---
-ALTER TABLE `osc_profile_translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
---
--- AUTO_INCREMENT для таблиці `osc_propositions`
---
-ALTER TABLE `osc_propositions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT для таблиці `osc_recall`
---
-ALTER TABLE `osc_recall`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_service_parallaxes`
---
-ALTER TABLE `osc_service_parallaxes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT для таблиці `osc_service_tables`
---
-ALTER TABLE `osc_service_tables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT для таблиці `osc_service_tables_rows`
---
-ALTER TABLE `osc_service_tables_rows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
---
--- AUTO_INCREMENT для таблиці `osc_site_languages`
---
-ALTER TABLE `osc_site_languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT для таблиці `osc_site_positions`
---
-ALTER TABLE `osc_site_positions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT для таблиці `osc_static_translations`
---
-ALTER TABLE `osc_static_translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
---
--- AUTO_INCREMENT для таблиці `osc_tables_info`
---
-ALTER TABLE `osc_tables_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
---
--- AUTO_INCREMENT для таблиці `osc_tasks`
---
-ALTER TABLE `osc_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT для таблиці `osc_task_admin_ref`
---
-ALTER TABLE `osc_task_admin_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT для таблиці `osc_total_config`
---
-ALTER TABLE `osc_total_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT для таблиці `osc_translate`
---
-ALTER TABLE `osc_translate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_users`
---
-ALTER TABLE `osc_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
---
--- AUTO_INCREMENT для таблиці `osc_users_chat`
---
-ALTER TABLE `osc_users_chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_users_dialogs`
---
-ALTER TABLE `osc_users_dialogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблиці `osc_users_types`
---
-ALTER TABLE `osc_users_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT для таблиці `osc_user_type_access`
---
-ALTER TABLE `osc_user_type_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=627;
---
--- AUTO_INCREMENT для таблиці `osc_wh_racks`
---
-ALTER TABLE `osc_wh_racks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT для таблиці `osc_wh_rows`
---
-ALTER TABLE `osc_wh_rows`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT для таблиці `osc_wh_sections`
---
-ALTER TABLE `osc_wh_sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT для таблиці `osc_wh_warehouses`
---
-ALTER TABLE `osc_wh_warehouses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;COMMIT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
